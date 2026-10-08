@@ -632,8 +632,8 @@ button { font: inherit; color: inherit; }
 }
 .achievement-icon { font-size: 1.5rem; line-height: 1; }
 .achievement-title { font-family: var(--font-display); font-weight: 600; margin: 0 0 0.3rem; }
-.achievement-role { color: var(--accent); font-weight: 500; margin: 0 0 0.1rem; font-size: 0.95rem; }
 .achievement-desc { color: var(--muted); margin: 0; font-size: 0.95rem; }
+.achievement-role { color: var(--accent); font-weight: 500; margin: 0 0 0.1rem; font-size: 0.95rem; }
 
 /* ---------- Education ---------- */
 .edu-card {
