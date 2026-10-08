@@ -3,20 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Wael Qubaisi — final-year Computer Science student, startup founder and software engineer. Full-stack web platforms and games. Seeking an internship or COOP role." />
+  <meta name="description" content="Wael Qubaisi — final-year CS student, founder & lead programmer of Thurayya Studio. I build full-stack web platforms and games. Open to internships and COOP." />
   <meta name="author" content="Wael Qubaisi" />
-  <title>Wael Qubaisi · Portfolio</title>
+  <title>Wael Qubaisi · Thurayya Studio</title>
 
-  <!-- Favicon (SVG placeholder in assets/) -->
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
 
-  <!-- Fonts: Space Grotesk (headings), Inter (body), JetBrains Mono (tags/labels). -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=IBM+Plex+Sans:wght@400;500;600;700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet" />
 
-  <!-- Apply a saved theme before first paint to avoid a flash of the wrong theme.
-       No theme saved = dark (the default). -->
   <script>
     (function () {
       try {
@@ -30,20 +26,19 @@
 
   <link rel="stylesheet" href="style.css" />
 </head>
-
-<body>
+<body data-reveal-root>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- ===================== HEADER / NAV ===================== -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="#top" aria-label="Wael Qubaisi — back to top">
+  <!-- ============================ HUD HEADER ============================ -->
+  <header class="hud">
+    <div class="hud-inner container">
+      <a class="hud-brand" href="#top" aria-label="Wael Qubaisi — back to top">
         <span class="brand-mark" aria-hidden="true">WQ</span>
         <span class="brand-name">Wael Qubaisi</span>
       </a>
 
-      <nav class="site-nav" id="site-nav" aria-label="Primary">
-        <ul class="nav-list">
+      <nav class="hud-nav" id="site-nav" aria-label="Primary">
+        <ul class="hud-nav-list">
           <li><a href="#about">About</a></li>
           <li><a href="#experience">Experience</a></li>
           <li><a href="#projects">Projects</a></li>
@@ -54,7 +49,11 @@
         </ul>
       </nav>
 
-      <div class="header-actions">
+      <div class="hud-actions">
+        <span class="hud-score" aria-label="Site score">
+          <span class="hud-score-label">SCORE</span>
+          <span class="hud-score-value" id="score">000000</span>
+        </span>
         <button class="icon-btn theme-toggle" id="theme-toggle" type="button"
                 aria-label="Switch color theme" aria-pressed="false">
           <span class="theme-icon" aria-hidden="true">☾</span>
@@ -69,113 +68,140 @@
   </header>
 
   <main id="main">
-    <!-- ===================== HERO ===================== -->
+    <!-- ============================ HERO ============================ -->
     <section class="hero" id="top" aria-labelledby="hero-heading">
       <div class="container hero-inner">
-        <p class="eyebrow">Final-year CS student · Startup founder · Software engineer</p>
-        <h1 class="hero-title" id="hero-heading">Wael Qubaisi</h1>
-        <p class="hero-tagline">
-          Founder &amp; Lead Programmer of <strong>Thurayya Studio</strong> — I build full-stack
-          web platforms and games, and I'm looking for an <strong>internship or COOP role</strong>
-          to bring that into a professional setting.
-        </p>
+        <div class="hero-copy" data-reveal="up">
+          <p class="eyebrow">PLAYER&nbsp;ONE&nbsp;·&nbsp;SELECT&nbsp;PATH</p>
+          <h1 class="hero-name" id="hero-heading">WAEL<br />QUBAISI</h1>
+          <p class="hero-line">I run <strong>Thurayya Studio</strong> — a game studio I founded — and I
+            write the code that ships the games. Final-year CS student, and I build the whole
+            stack: web platforms, game mechanics, and the backend behind them.</p>
 
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#projects">View Projects</a>
-          <a class="btn btn-secondary" href="assets/WaelQubaisiCV.pdf" download>Download CV</a>
-          <a class="btn btn-ghost" href="#contact">Contact</a>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">▸ Select a project</a>
+            <a class="btn btn-secondary" href="assets/WaelQubaisiCV.pdf" download>⬇ Download CV</a>
+            <a class="btn btn-ghost" href="#contact">Get in touch</a>
+          </div>
+
+          <ul class="meta-line" aria-label="Location and status">
+            <li><span class="meta-tag">LOC</span> Khobar, KSA</li>
+            <li><span class="meta-tag">GRAD</span> IAU · May 2027</li>
+            <li><span class="meta-tag">STATUS</span> Open to internship / COOP</li>
+          </ul>
         </div>
 
-        <ul class="hero-meta" aria-label="Location and status">
-          <li>📍 Khobar, KSA</li>
-          <li>🎓 IAU · Expected May 2027</li>
-          <li>🚀 Open to internship / COOP</li>
-        </ul>
+        <aside class="player-card" data-reveal="pop">
+          <div class="player-card-header">
+            <span class="player-card-name">PLAYER.CARD</span>
+            <span class="player-card-warn">LIVE</span>
+          </div>
+          <div class="player-portrait" aria-hidden="true">
+            <svg viewBox="0 0 16 16" shape-rendering="crispEdges" role="presentation">
+              <rect x="3" y="1" width="10" height="10" fill="var(--panel-2)"/>
+              <rect x="5" y="2" width="6" height="6" fill="var(--accent)"/>
+              <rect x="6" y="8" width="4" height="2" fill="var(--accent-soft)"/>
+              <rect x="5" y="12" width="6" height="1" fill="var(--muted)"/>
+            </svg>
+          </div>
+          <dl class="player-stats">
+            <div class="player-stat">
+              <dt>EXP — TIME TO GRADUATE</dt>
+              <dd class="hp"><span class="hp-fill" style="--hp: 78%;"></span></dd>
+            </div>
+            <div class="player-stat">
+              <dt>PROJECTS BUILDING</dt>
+              <dd class="hp hp-amber"><span class="hp-fill" style="--hp: 60%;"></span></dd>
+            </div>
+          </dl>
+          <p class="player-hint blink">PRESS&nbsp;START&nbsp;—&nbsp;TRY&nbsp;THE&nbsp;DEMO&nbsp;↓</p>
+        </aside>
       </div>
     </section>
 
-    <!-- ===================== ABOUT / SUMMARY ===================== -->
-    <section class="section" id="about" aria-labelledby="about-heading">
+    <!-- ============================ ABOUT / CHARACTER SHEET ============================ -->
+    <section class="section about" id="about" aria-labelledby="about-heading">
       <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">About</p>
-          <h2 class="section-title" id="about-heading">Summary</h2>
+        <div class="section-head" data-reveal="up">
+          <p class="eyebrow">CHARACTER SHEET</p>
+          <h2 class="section-title" id="about-heading">Who I am</h2>
         </div>
 
         <div class="about-grid">
-          <div class="about-copy">
-            <p>
-              Final-year Computer Science student at <strong>Imam Abdulrahman Bin Faisal University
-              (IAU)</strong>, startup founder, and software engineer. I build full-stack web
-              platforms and games, and I'm looking for an internship or COOP role to bring that
-              into a professional setting.
-            </p>
-            <p>
-              As <strong>Founder &amp; Lead Programmer of Thurayya Studio</strong>, I handle
-              everything from code architecture to team coordination, shipping games across
-              multiple projects.
-            </p>
+          <div class="about-copy" data-reveal="left">
+            <p>Final-year Computer Science student at <strong>IAU</strong> and the founder &amp; lead
+              programmer of <strong>Thurayya Studio</strong>. I take projects from a blank file to
+              something people actually use — web platforms, game systems, and the architecture
+              that holds them together.</p>
+            <p>Right now I'm looking for an <strong>internship or COOP role</strong> where I can
+              work on real products with a real team, and bring the game-studio mindset into a
+              professional setting.</p>
           </div>
 
-          <div class="about-stats" aria-label="Key facts">
+          <div class="about-stats" data-reveal="right">
             <div class="stat">
+              <span class="stat-label">EXPECTED GRADUATION</span>
               <span class="stat-value">2027</span>
-              <span class="stat-label">Expected graduation · IAU</span>
+              <span class="stat-bar"><span class="stat-fill" style="--w: 100%;"></span></span>
             </div>
             <div class="stat">
+              <span class="stat-label">VOLUNTEER HOURS</span>
               <span class="stat-value">100+</span>
-              <span class="stat-label">Volunteer service hours</span>
+              <span class="stat-bar"><span class="stat-fill" style="--w: 85%;"></span></span>
             </div>
             <div class="stat">
+              <span class="stat-label">PROJECTS BUILT</span>
               <span class="stat-value">3</span>
-              <span class="stat-label">Projects built</span>
+              <span class="stat-bar"><span class="stat-fill" style="--w: 45%;"></span></span>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ===================== EXPERIENCE ===================== -->
-    <section class="section" id="experience" aria-labelledby="experience-heading">
+    <!-- ============================ EXPERIENCE / QUEST LOG ============================ -->
+    <section class="section quest" id="experience" aria-labelledby="experience-heading">
       <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">Experience</p>
+        <div class="section-head" data-reveal="up">
+          <p class="eyebrow">QUEST LOG</p>
           <h2 class="section-title" id="experience-heading">Where I've worked</h2>
         </div>
 
-        <ol class="timeline">
-          <li class="timeline-item">
-            <div class="timeline-marker" aria-hidden="true"></div>
-            <div class="timeline-card">
-              <p class="timeline-role">Founder &amp; Lead Programmer</p>
-              <p class="timeline-org">
-                <a href="https://thurayyastudio.com" target="_blank" rel="noopener">thurayyastudio.com</a>
-                · Dammam, KSA
-              </p>
-              <p class="timeline-date">Jan 2025 – Present</p>
-              <ul class="timeline-bullets">
-                <li>Founded a game studio from scratch — handling everything from code architecture to team coordination.</li>
-                <li>Led development across multiple projects using Git/GitHub workflows to keep the team in sync.</li>
-                <li>Currently in active development on our debut game, working closely with designers, artists, and developers.</li>
+        <ol class="quest-list">
+          <li class="quest-item" data-reveal="up">
+            <span class="quest-marker" aria-hidden="true"></span>
+            <article class="quest-card">
+              <div class="quest-card-head">
+                <span class="quest-status">ACTIVE&nbsp;QUEST</span>
+                <span class="quest-date">JAN&nbsp;2025&nbsp;—&nbsp;PRESENT</span>
+              </div>
+              <h3 class="quest-title">Founder &amp; Lead Programmer</h3>
+              <p class="quest-org"><a href="https://thurayyastudio.com" target="_blank" rel="noopener">thurayyastudio.com</a> &nbsp;·&nbsp; Dammam, KSA</p>
+              <ul class="quest-bullets">
+                <li>Founded the studio from scratch — code architecture through team coordination.</li>
+                <li>Led development across multiple projects on Git/GitHub to keep the team in sync.</li>
+                <li>In active development on our debut game, working with designers, artists, and developers.</li>
               </ul>
-            </div>
+            </article>
           </li>
         </ol>
       </div>
     </section>
 
-    <!-- ===================== PROJECTS ===================== -->
-    <section class="section" id="projects" aria-labelledby="projects-heading">
+    <!-- ============================ PROJECTS / SELECT GAME ============================ -->
+    <section class="section select" id="projects" aria-labelledby="projects-heading">
       <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">Projects</p>
-          <h2 class="section-title" id="projects-heading">Selected work</h2>
-          <p class="section-sub">Select a project to read more.</p>
+        <div class="section-head" data-reveal="up">
+          <p class="eyebrow">SELECT YOUR GAME</p>
+          <h2 class="section-title" id="projects-heading">Projects</h2>
+          <p class="section-sub">Pick a cartridge to read more.</p>
         </div>
 
-        <div class="projects-grid" id="projects-grid">
-          <article class="project-card">
-            <img class="project-thumb" src="assets/iqraa.svg" alt="Placeholder screenshot for Iqraa Library" loading="lazy" />
+        <div class="select-grid">
+          <article class="project-card p-cart" data-reveal="up">
+            <div class="project-thumb">
+              <img src="assets/iqraa.svg" alt="Placeholder screenshot for Iqraa Library" loading="lazy" />
+            </div>
             <div class="project-body">
               <div class="project-tags">
                 <span class="tag">PHP</span>
@@ -184,53 +210,44 @@
               </div>
               <h3 class="project-title">Iqraa Library</h3>
               <p class="project-meta">Multi-vendor bookstore · Jun 2026</p>
-              <p class="project-desc">
-                A platform where multiple vendors can list and sell books, with separate inventory
-                and transaction tracking per vendor.
-              </p>
+              <p class="project-desc">One platform where multiple vendors list and sell books, each with their own inventory and transaction tracking.</p>
               <details class="project-details">
                 <summary class="details-toggle">Read more</summary>
                 <div class="details-content">
-                  <p>
-                    A normalized relational schema keeps data integrity across vendor and user
-                    transactions, letting independent vendors manage their own inventory on one
-                    platform.
-                  </p>
+                  <p>A normalized relational schema keeps data integrity across vendor and user transactions, letting independent vendors manage their own inventory on one platform.</p>
                 </div>
               </details>
             </div>
           </article>
 
-          <article class="project-card">
-            <img class="project-thumb" src="assets/eventms.svg" alt="Placeholder screenshot for Event Management System" loading="lazy" />
+          <article class="project-card p-event" data-reveal="up">
+            <div class="project-thumb">
+              <img src="assets/eventms.svg" alt="Placeholder screenshot for Event Management System" loading="lazy" />
+            </div>
             <div class="project-body">
               <div class="project-tags">
                 <span class="tag">Django REST Framework</span>
                 <span class="tag">MySQL</span>
                 <span class="tag">React</span>
                 <span class="tag">Vite</span>
-                <span class="tag">TailwindCSS</span>
+                <span class="tag">Tailwind</span>
               </div>
               <h3 class="project-title">Event Management System</h3>
               <p class="project-meta">Fullstack system · 2025</p>
-              <p class="project-desc">
-                A fullstack system for managing university events — handling registrations, user
-                authentication, and role-based access for admins, students, and organizers.
-              </p>
+              <p class="project-desc">Managing university events end-to-end — registrations, authentication, and role-based access for admins, students, and organizers.</p>
               <details class="project-details">
                 <summary class="details-toggle">Read more</summary>
                 <div class="details-content">
-                  <p>
-                    Role-based access control restricts admin, organizer and participant actions,
-                    backed by a normalized schema with complex constraints.
-                  </p>
+                  <p>Role-based access control restricts admin, organizer and participant actions, backed by a normalized schema with complex constraints.</p>
                 </div>
               </details>
             </div>
           </article>
 
-          <article class="project-card">
-            <img class="project-thumb" src="assets/pexet.svg" alt="Placeholder screenshot for Pexet Inc" loading="lazy" />
+          <article class="project-card p-game" data-reveal="up">
+            <div class="project-thumb">
+              <img src="assets/pexet.svg" alt="Placeholder screenshot for Pexet Inc" loading="lazy" />
+            </div>
             <div class="project-body">
               <div class="project-tags">
                 <span class="tag">Godot</span>
@@ -240,17 +257,11 @@
               </div>
               <h3 class="project-title">Pexet Inc</h3>
               <p class="project-meta">Game · 2025</p>
-              <p class="project-desc">
-                A game in active development featuring state management, game loop architecture,
-                and modular OOP design for entities and assets.
-              </p>
+              <p class="project-desc">A game in active development — state management, a game-loop architecture, and modular OOP design for entities and assets.</p>
               <details class="project-details">
                 <summary class="details-toggle">Read more</summary>
                 <div class="details-content">
-                  <p>
-                    Built with modular object-oriented design: state management, a game-loop
-                    architecture, and modular systems for entities and assets.
-                  </p>
+                  <p>Built with modular object-oriented design: state management, a game-loop architecture, and modular systems for entities and assets.</p>
                 </div>
               </details>
             </div>
@@ -259,161 +270,256 @@
       </div>
     </section>
 
-    <!-- ===================== SKILLS ===================== -->
-    <section class="section" id="skills" aria-labelledby="skills-heading">
+    <!-- ============================ SKILLS / LOADOUT ============================ -->
+    <section class="section loadout" id="skills" aria-labelledby="skills-heading">
       <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">Skills</p>
+        <div class="section-head" data-reveal="up">
+          <p class="eyebrow">LOADOUT</p>
           <h2 class="section-title" id="skills-heading">What I work with</h2>
         </div>
 
-        <div class="skills-grid">
-          <div class="skill-group">
-            <h3 class="skill-group-title">Core</h3>
-            <ul class="skill-list">
-              <li>SQL</li><li>JavaScript</li><li>HTML/CSS</li><li>Python</li>
+        <div class="loadout-grid">
+          <div class="loadout-group lg-wide" data-reveal="left">
+            <h3 class="loadout-title">Core</h3>
+            <ul class="chip-list">
+              <li class="chip">SQL</li>
+              <li class="chip">JavaScript</li>
+              <li class="chip">HTML/CSS</li>
+              <li class="chip">Python</li>
             </ul>
           </div>
 
-          <div class="skill-group">
-            <h3 class="skill-group-title">Familiar</h3>
-            <ul class="skill-list">
-              <li>Java</li><li>C#</li><li>PHP</li><li>C++</li>
+          <div class="loadout-group" data-reveal="right">
+            <h3 class="loadout-title">Familiar</h3>
+            <ul class="chip-list">
+              <li class="chip">Java</li>
+              <li class="chip">C#</li>
+              <li class="chip">PHP</li>
+              <li class="chip">C++</li>
             </ul>
           </div>
 
-          <div class="skill-group">
-            <h3 class="skill-group-title">Web &amp; Backend</h3>
-            <ul class="skill-list">
-              <li>React.js</li><li>Node.js</li><li>Django REST Framework</li><li>REST APIs</li>
+          <div class="loadout-group" data-reveal="left">
+            <h3 class="loadout-title">Web &amp; Backend</h3>
+            <ul class="chip-list">
+              <li class="chip">React.js</li>
+              <li class="chip">Node.js</li>
+              <li class="chip">Django REST Framework</li>
+              <li class="chip">REST APIs</li>
             </ul>
           </div>
 
-          <div class="skill-group">
-            <h3 class="skill-group-title">Tools</h3>
-            <ul class="skill-list">
-              <li>Git</li><li>GitHub</li><li>Linux</li><li>VS Code</li><li>Godot</li><li>Unity</li>
+          <div class="loadout-group lg-wide" data-reveal="right">
+            <h3 class="loadout-title">Tools</h3>
+            <ul class="chip-list">
+              <li class="chip">Git</li>
+              <li class="chip">GitHub</li>
+              <li class="chip">Linux</li>
+              <li class="chip">VS Code</li>
+              <li class="chip">Godot</li>
+              <li class="chip">Unity</li>
             </ul>
           </div>
 
-          <div class="skill-group">
-            <h3 class="skill-group-title">Concepts</h3>
-            <ul class="skill-list">
-              <li>OOP</li><li>Data Structures</li><li>Algorithms</li>
-              <li>Database Normalization</li><li>System Design</li>
+          <div class="loadout-group" data-reveal="left">
+            <h3 class="loadout-title">Concepts</h3>
+            <ul class="chip-list">
+              <li class="chip">OOP</li>
+              <li class="chip">Data Structures</li>
+              <li class="chip">Algorithms</li>
+              <li class="chip">Database Normalization</li>
+              <li class="chip">System Design</li>
             </ul>
           </div>
 
-          <div class="skill-group">
-            <h3 class="skill-group-title">Languages</h3>
-            <ul class="skill-list">
-              <li>Arabic (Native)</li><li>English (Fluent)</li>
+          <div class="loadout-group" data-reveal="right">
+            <h3 class="loadout-title">Languages</h3>
+            <ul class="chip-list">
+              <li class="chip">Arabic (Native)</li>
+              <li class="chip">English (Fluent)</li>
             </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ===================== ACHIEVEMENTS & VOLUNTEERING ===================== -->
-    <section class="section" id="achievements" aria-labelledby="achievements-heading">
+    <!-- ============================ ACHIEVEMENTS / TROPHIES ============================ -->
+    <section class="section trophy" id="achievements" aria-labelledby="achievements-heading">
       <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">Achievements &amp; Volunteering</p>
+        <div class="section-head" data-reveal="up">
+          <p class="eyebrow">ACHIEVEMENTS</p>
           <h2 class="section-title" id="achievements-heading">Recognition &amp; highlights</h2>
         </div>
 
-        <ul class="achievement-list">
-          <li class="achievement-item">
-            <span class="achievement-icon" aria-hidden="true">🎮</span>
-            <div>
-              <p class="achievement-title">Game Development Unit — IAU</p>
-              <p class="achievement-role">Game Developer &amp; Tech Lead</p>
-              <p class="achievement-desc">Built software and games for university events; recognized as Top Volunteer with 100+ service hours.</p>
+        <div class="trophy-list">
+          <article class="trophy-card" data-reveal="up">
+            <span class="trophy-icon" aria-hidden="true">
+              <svg viewBox="0 0 16 16" shape-rendering="crispEdges">
+                <rect x="3" y="1" width="10" height="7" fill="var(--accent)"/>
+                <rect x="1" y="2" width="2" height="4" fill="var(--accent)"/>
+                <rect x="13" y="2" width="2" height="4" fill="var(--accent)"/>
+                <rect x="5" y="8" width="6" height="2" fill="var(--accent-strong)"/>
+                <rect x="6" y="10" width="4" height="2" fill="var(--accent)"/>
+                <rect x="3" y="13" width="10" height="2" fill="var(--muted)"/>
+              </svg>
+            </span>
+            <div class="trophy-info">
+              <span class="trophy-badge">UNLOCKED</span>
+              <h3 class="trophy-title">Game Development Unit — IAU</h3>
+              <p class="trophy-role">Game Developer &amp; Tech Lead</p>
+              <p class="trophy-desc">Built software and games for university events; recognized as Top Volunteer with 100+ service hours.</p>
             </div>
-          </li>
-          <li class="achievement-item">
-            <span class="achievement-icon" aria-hidden="true">🚀</span>
-            <div>
-              <p class="achievement-title">Thurayya Studio</p>
-              <p class="achievement-role">Startup Founder</p>
-              <p class="achievement-desc">Scaled from ideas to operating studio while maintaining a full academic course load.</p>
+          </article>
+
+          <article class="trophy-card" data-reveal="up">
+            <span class="trophy-icon" aria-hidden="true">
+              <svg viewBox="0 0 16 16" shape-rendering="crispEdges">
+                <rect x="6" y="0" width="4" height="1" fill="var(--accent)"/>
+                <rect x="5" y="1" width="6" height="6" fill="var(--accent)"/>
+                <rect x="4" y="4" width="1" height="3" fill="var(--accent-strong)"/>
+                <rect x="11" y="4" width="1" height="3" fill="var(--accent-strong)"/>
+                <rect x="6" y="7" width="4" height="1" fill="var(--accent)"/>
+                <rect x="6" y="8" width="1" height="4" fill="var(--signal)"/>
+                <rect x="9" y="8" width="1" height="4" fill="var(--signal)"/>
+                <rect x="7" y="9" width="2" height="3" fill="var(--signal)"/>
+                <rect x="5" y="10" width="6" height="1" fill="var(--signal)"/>
+              </svg>
+            </span>
+            <div class="trophy-info">
+              <span class="trophy-badge">UNLOCKED</span>
+              <h3 class="trophy-title">Thurayya Studio</h3>
+              <p class="trophy-role">Startup Founder</p>
+              <p class="trophy-desc">Scaled from an idea to an operating studio while keeping a full academic course load.</p>
             </div>
-          </li>
-        </ul>
+          </article>
+        </div>
       </div>
     </section>
 
-    <!-- ===================== EDUCATION ===================== -->
-    <section class="section" id="education" aria-labelledby="education-heading">
+    <!-- ============================ EDUCATION / SAVE DATA ============================ -->
+    <section class="section save" id="education" aria-labelledby="education-heading">
       <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">Education</p>
+        <div class="section-head" data-reveal="up">
+          <p class="eyebrow">SAVE FILE</p>
           <h2 class="section-title" id="education-heading">Where I studied</h2>
         </div>
 
-        <div class="edu-card">
-          <p class="edu-school">Imam Abdulrahman Bin Faisal University (IAU)</p>
-          <p class="edu-degree">Bachelor of Science in Computer Science</p>
-          <p class="edu-date">Expected: May 2027</p>
+        <div class="save-card" data-reveal="pop">
+          <div class="save-slot">SLOT&nbsp;01</div>
+          <div class="save-info">
+            <h3 class="save-school">Imam Abdulrahman Bin Faisal University (IAU)</h3>
+            <p class="save-degree">Bachelor of Science in Computer Science</p>
+            <p class="save-date">Expected: May 2027</p>
+          </div>
+          <span class="save-continue blink">CONTINUE&nbsp;▸</span>
         </div>
       </div>
     </section>
 
-    <!-- ===================== CONTACT ===================== -->
-    <section class="section" id="contact" aria-labelledby="contact-heading">
+    <!-- ============================ ARCADE MINI-GAME ============================ -->
+    <section class="section arcade" id="arcade" aria-labelledby="arcade-heading">
       <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">Contact</p>
-          <h2 class="section-title" id="contact-heading">Let's talk</h2>
-          <p class="section-sub">
-            I'm open to internship and Cooperative Education (COOP) opportunities. Reach out through any channel below.
-          </p>
+        <div class="section-head" data-reveal="up">
+          <p class="eyebrow">INSERT&nbsp;COIN</p>
+          <h2 class="section-title" id="arcade-heading">Dodge the blocks</h2>
+          <p class="section-sub">A tiny game I hacked together while building Pexet. Move the bar with ← → or drag.</p>
         </div>
 
-        <div class="contact-grid">
-          <a class="contact-card" href="mailto:WaelQubaisi@hotmail.com">
-            <span class="contact-icon" aria-hidden="true">✉️</span>
-            <span class="contact-label">Email</span>
-            <span class="contact-value">WaelQubaisi@hotmail.com</span>
+        <div class="arcade-body" data-reveal="up">
+          <div class="arcade-screen">
+            <canvas id="game" width="360" height="240" aria-label="Block dodger mini game"></canvas>
+            <div class="arcade-hud">
+              <span>SCORE&nbsp;<strong id="game-score">0</strong></span>
+              <span>LIVES&nbsp;<strong id="game-lives">3</strong></span>
+            </div>
+          </div>
+          <div class="arcade-side">
+            <button class="btn btn-primary" id="game-start" type="button">INSERT&nbsp;COIN</button>
+            <p class="arcade-note">← → move · R restart<br />Falling blocks cost a life.<br />Catch them to score.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ CONTACT / LOBBY ============================ -->
+    <section class="section lobby" id="contact" aria-labelledby="contact-heading">
+      <div class="container">
+        <div class="section-head" data-reveal="up">
+          <p class="eyebrow">MULTIPLAYER&nbsp;LOBBY</p>
+          <h2 class="section-title" id="contact-heading">Let's team up</h2>
+          <p class="section-sub">Open to internship and COOP opportunities — reach me on any channel.</p>
+        </div>
+
+        <div class="lobby-grid">
+          <a class="lobby-card" href="mailto:WaelQubaisi@hotmail.com" data-reveal="up">
+            <span class="lobby-slot">P1</span>
+            <span class="lobby-icon" aria-hidden="true">
+              <svg viewBox="0 0 16 16" shape-rendering="crispEdges">
+                <rect x="2" y="3" width="12" height="10" fill="var(--accent)"/>
+                <rect x="3" y="5" width="10" height="1" fill="var(--panel)"/>
+                <rect x="3" y="7" width="10" height="1" fill="var(--panel)"/>
+                <rect x="3" y="9" width="10" height="1" fill="var(--panel)"/>
+              </svg>
+            </span>
+            <span class="lobby-label">EMAIL</span>
+            <span class="lobby-value">WaelQubaisi@hotmail.com</span>
           </a>
 
-          <a class="contact-card" href="https://github.com/Waelaaq" target="_blank" rel="noopener">
-            <span class="contact-icon" aria-hidden="true">🐙</span>
-            <span class="contact-label">GitHub</span>
-            <span class="contact-value">github.com/Waelaaq</span>
+          <a class="lobby-card" href="https://github.com/Waelaaq" target="_blank" rel="noopener" data-reveal="up">
+            <span class="lobby-slot">P2</span>
+            <span class="lobby-icon" aria-hidden="true">
+              <svg viewBox="0 0 16 16" shape-rendering="crispEdges">
+                <rect x="3" y="1" width="10" height="10" fill="var(--accent)"/>
+                <rect x="4" y="2" width="8" height="8" fill="var(--panel)"/>
+                <rect x="5" y="3" width="6" height="6" fill="var(--accent)"/>
+                <rect x="6" y="4" width="4" height="4" fill="var(--panel)"/>
+              </svg>
+            </span>
+            <span class="lobby-label">GITHUB</span>
+            <span class="lobby-value">github.com/Waelaaq</span>
           </a>
 
-          <a class="contact-card" href="https://www.linkedin.com/in/wael-qubaisi-08874733a/" target="_blank" rel="noopener">
-            <span class="contact-icon" aria-hidden="true">💼</span>
-            <span class="contact-label">LinkedIn</span>
-            <span class="contact-value">linkedin.com/in/wael-qubaisi</span>
+          <a class="lobby-card" href="https://www.linkedin.com/in/wael-qubaisi-08874733a/" target="_blank" rel="noopener" data-reveal="up">
+            <span class="lobby-slot">P3</span>
+            <span class="lobby-icon" aria-hidden="true">
+              <svg viewBox="0 0 16 16" shape-rendering="crispEdges">
+                <rect x="2" y="3" width="12" height="10" fill="var(--accent)"/>
+                <rect x="4" y="4" width="3" height="3" fill="var(--panel)"/>
+                <rect x="4" y="9" width="3" height="3" fill="var(--panel)"/>
+                <rect x="9" y="6" width="3" height="6" fill="var(--panel)"/>
+                <rect x="9" y="4" width="3" height="1" fill="var(--panel)"/>
+              </svg>
+            </span>
+            <span class="lobby-label">LINKEDIN</span>
+            <span class="lobby-value">linkedin.com/in/wael-qubaisi</span>
           </a>
         </div>
 
-        <div class="contact-cta">
-          <a class="btn btn-primary" href="mailto:WaelQubaisi@hotmail.com">Email me</a>
+        <div class="lobby-cta" data-reveal="up">
+          <a class="btn btn-primary" href="mailto:WaelQubaisi@hotmail.com">▸ Send me an email</a>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- ===================== FOOTER ===================== -->
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
+  <!-- ============================ FOOTER / PRESS START ============================ -->
+  <footer class="continue">
+    <div class="container continue-inner">
+      <div class="continue-brand">
         <span class="brand-mark" aria-hidden="true">WQ</span>
         <span>Wael Qubaisi</span>
       </div>
-      <ul class="footer-links">
+      <ul class="continue-links">
         <li><a href="https://github.com/Waelaaq" target="_blank" rel="noopener">GitHub</a></li>
         <li><a href="https://www.linkedin.com/in/wael-qubaisi-08874733a/" target="_blank" rel="noopener">LinkedIn</a></li>
         <li><a href="mailto:WaelQubaisi@hotmail.com">Email</a></li>
       </ul>
-      <p class="footer-note">
-        © <span id="year">2026</span> Wael Qubaisi · Built with HTML, CSS &amp; vanilla JS.
-      </p>
+      <p class="continue-note">© <span id="year">2026</span> Wael Qubaisi · made with HTML, CSS &amp; vanilla JS.</p>
+      <p class="continue-hint">↑&nbsp;↑&nbsp;↓&nbsp;↓&nbsp;←&nbsp;→&nbsp;←&nbsp;→&nbsp;B&nbsp;A</p>
     </div>
   </footer>
+
+  <div class="toast" id="cheat-toast" role="status" aria-live="polite"></div>
 
   <script src="script.js"></script>
 </body>
