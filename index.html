@@ -60,9 +60,9 @@
         </nav>
 
         <div class="hud-actions">
-          <span class="hud-score" aria-label="Site score">
-            <span class="hud-score-label">SCORE</span>
-            <span class="hud-score-value" id="score">000000</span>
+          
+            
+            
           </span>
           <button
             class="icon-btn theme-toggle"
@@ -128,41 +128,24 @@
               <span class="player-card-warn">LIVE</span>
             </div>
             <div class="player-portrait" aria-hidden="true">
-              <svg
-                viewBox="0 0 16 16"
-                shape-rendering="crispEdges"
-                role="presentation"
-              >
-                <rect
-                  x="3"
-                  y="1"
-                  width="10"
-                  height="10"
-                  fill="var(--panel-2)"
-                />
-                <rect x="5" y="2" width="6" height="6" fill="var(--accent)" />
-                <rect
-                  x="6"
-                  y="8"
-                  width="4"
-                  height="2"
-                  fill="var(--accent-soft)"
-                />
-                <rect x="5" y="12" width="6" height="1" fill="var(--muted)" />
+              <svg viewBox="0 0 16 16" shape-rendering="crispEdges">
+                <rect x="3" y="1" width="10" height="7" fill="var(--accent)" />
+                <rect x="1" y="2" width="2" height="4" fill="var(--accent)" />
+                <rect x="13" y="2" width="2" height="4" fill="var(--accent)" />
+                <rect x="5" y="8" width="6" height="2" fill="var(--accent-strong)" />
+                <rect x="6" y="10" width="4" height="2" fill="var(--accent)" />
+                <rect x="3" y="13" width="10" height="2" fill="var(--muted)" />
               </svg>
             </div>
             <dl class="player-stats">
               <div class="player-stat">
                 <dt>EXP — TIME TO GRADUATE</dt>
                 <dd class="hp">
-                  <span class="hp-fill" style="--hp: 78%"></span>
+                  <span class="hp-fill" style="--hp: 95%"></span>
                 </dd>
               </div>
               <div class="player-stat">
-                <dt>PROJECTS BUILDING</dt>
-                <dd class="hp hp-amber">
-                  <span class="hp-fill" style="--hp: 60%"></span>
-                </dd>
+
               </div>
             </dl>
             <p class="player-hint blink">
@@ -362,7 +345,8 @@
             <article class="project-card p-game" data-reveal="up">
               <div class="project-thumb">
                 <img
-                  src="assets/pexet.svg"
+                  class="pexet-image"
+                  src="assets/pexet.jpg"
                   alt="Placeholder screenshot for Pexet Inc"
                   loading="lazy"
                 />
