@@ -1,7 +1,7 @@
 /* ============================================================
    Wael Qubaisi — Portfolio
-   Vanilla JS. Theme, mobile nav, scroll reveals, score,
-   a Konami-code easter egg and a playable canvas mini-game.
+   Vanilla JS. Printing toggle, mobile nav, active section,
+   the mobile dock, a Konami misprint, and the ثريا dot-settle.
    No dependencies, no build step.
    ============================================================ */
 
@@ -10,37 +10,40 @@
 
   var doc = document;
   var root = doc.documentElement;
-  var THEME_KEY = 'theme';
+  var PRINTING_KEY = 'printing';
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
-  // Enable reveal styling (content stays visible if JS never runs).
-  root.classList.add('js');
+  /* ---------- Day / night printing ---------- */
+  var printingToggle = doc.getElementById('printing-toggle');
 
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* ---------- Theme toggle ---------- */
-  var themeToggle = doc.getElementById('theme-toggle');
-
-  function currentTheme() {
-    return root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+  function currentPrinting() {
+    var set = root.getAttribute('data-printing');
+    if (set === 'day' || set === 'night') return set;
+    return prefersDark.matches ? 'night' : 'day';
   }
 
-  function setTheme(theme) {
-    root.setAttribute('data-theme', theme);
-    try { localStorage.setItem(THEME_KEY, theme); } catch (e) {}
-    if (themeToggle) {
-      themeToggle.querySelector('.theme-icon').textContent = theme === 'dark' ? '\u263E' : '\u2600';
-      themeToggle.setAttribute('aria-pressed', String(theme === 'light'));
-      themeToggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
-    }
+  function syncPrintingToggle() {
+    if (!printingToggle) return;
+    var night = currentPrinting() === 'night';
+    printingToggle.setAttribute('aria-pressed', String(night));
+    printingToggle.setAttribute('aria-label', night ? 'Night printing on' : 'Night printing off');
   }
 
-  if (themeToggle) {
-    themeToggle.addEventListener('click', function () {
-      setTheme(currentTheme() === 'dark' ? 'light' : 'dark');
+  if (printingToggle) {
+    printingToggle.addEventListener('click', function () {
+      var next = currentPrinting() === 'night' ? 'day' : 'night';
+      root.setAttribute('data-printing', next);
+      try { localStorage.setItem(PRINTING_KEY, next); } catch (e) {}
+      syncPrintingToggle();
+      if (thurayya) thurayya.repaint();
     });
   }
-
-  setTheme(currentTheme());
+  prefersDark.addEventListener('change', function () {
+    syncPrintingToggle();
+    if (thurayya) thurayya.repaint();
+  });
+  syncPrintingToggle();
 
   /* ---------- Mobile navigation ---------- */
   var menuToggle = doc.getElementById('menu-toggle');
@@ -51,6 +54,7 @@
     nav.classList.toggle('is-open', open);
     menuToggle.setAttribute('aria-expanded', String(open));
     menuToggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+    menuToggle.querySelector('use').setAttribute('href', open ? '#i-close' : '#i-menu');
   }
 
   if (menuToggle && nav) {
@@ -61,7 +65,10 @@
       if (e.target.closest('a')) setMenu(false);
     });
     doc.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') setMenu(false);
+      if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+        setMenu(false);
+        menuToggle.focus();
+      }
     });
   }
 
@@ -69,208 +76,332 @@
   var yearEl = doc.getElementById('year');
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
-  /* ---------- Scroll-triggered reveals ---------- */
-  var revealEls = Array.prototype.slice.call(doc.querySelectorAll('[data-reveal]'));
+  /* ---------- Active section in the nav ---------- */
+  var navLinks = nav ? Array.prototype.slice.call(nav.querySelectorAll('a[href^="#"]')) : [];
 
-  if (reduceMotion) {
-    revealEls.forEach(function (el) { el.classList.add('is-in'); });
-  } else if ('IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function (entries) {
+  if ('IntersectionObserver' in window && navLinks.length) {
+    var sections = navLinks
+      .map(function (a) { return doc.querySelector(a.getAttribute('href')); })
+      .concat([doc.getElementById('top'), doc.getElementById('education')])
+      .filter(Boolean);
+
+    var sectionIo = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
-        if (en.isIntersecting) {
-          en.target.classList.add('is-in');
-          io.unobserve(en.target);
-          setTimeout(function () {
-            en.target.removeAttribute('data-reveal');
-            en.target.classList.remove('is-in');
-          }, 700);
-        }
+        if (!en.isIntersecting) return;
+        // Bands without a nav entry (poster, education) clear the marker
+        var id = '#' + en.target.id;
+        navLinks.forEach(function (a) {
+          if (a.getAttribute('href') === id) a.setAttribute('aria-current', 'true');
+          else a.removeAttribute('aria-current');
+        });
       });
-    }, { threshold: 0.14, rootMargin: '0px 0px -40px 0px' });
+    }, { rootMargin: '-45% 0px -50% 0px' });
 
-    revealEls.forEach(function (el) { io.observe(el); });
-  } else {
-    revealEls.forEach(function (el) { el.classList.add('is-in'); });
+    sections.forEach(function (s) { sectionIo.observe(s); });
   }
 
-  /* ---------- Header score counter ---------- */
-  var scoreEl = doc.getElementById('score');
-  if (scoreEl && !reduceMotion) {
-    var score = 0;
-    var target = 1000;
-    var tick = setInterval(function () {
-      score += 37;
-      if (score >= target) { score = target; clearInterval(tick); }
-      scoreEl.textContent = String(Math.floor(score)).padStart(6, '0');
-    }, 40);
+  /* ---------- Mobile dock: hide while a tear-off strip is on screen ---------- */
+  var dock = doc.getElementById('dock');
+  var strips = Array.prototype.slice.call(doc.querySelectorAll('.tearoff'));
+
+  if (dock && 'IntersectionObserver' in window && strips.length) {
+    var visibleStrips = 0;
+    var dockIo = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        visibleStrips += en.isIntersecting ? 1 : -1;
+      });
+      visibleStrips = Math.max(0, visibleStrips);
+      dock.classList.toggle('is-hidden', visibleStrips > 0);
+    });
+    strips.forEach(function (s) { dockIo.observe(s); });
   }
 
-  /* ---------- Konami-code easter egg ---------- */
+  /* ---------- Konami: the plates slip out of register ---------- */
   var konami = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
   var konamiIdx = 0;
+  var toast = doc.getElementById('toast');
 
-  function activateCheat() {
-    var toast = doc.getElementById('cheat-toast');
-    if (toast) {
-      toast.textContent = 'CHEAT ACCEPTED — +1000 EXP · PLAYER 2 JOINED';
-      toast.classList.add('is-on');
-      clearTimeout(activateCheat.t);
-      activateCheat.t = setTimeout(function () { toast.classList.remove('is-on'); }, 3400);
-    }
-    doc.body.classList.add('cheat-mode');
-    if (scoreEl) scoreEl.textContent = '001000';
+  function showToast(text) {
+    if (!toast) return;
+    toast.textContent = text;
+    toast.classList.add('is-on');
+    clearTimeout(showToast.t);
+    showToast.t = setTimeout(function () { toast.classList.remove('is-on'); }, 3400);
   }
 
   doc.addEventListener('keydown', function (e) {
     var key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
     if (key === konami[konamiIdx]) {
       konamiIdx++;
-      if (konamiIdx === konami.length) { konamiIdx = 0; activateCheat(); }
+      if (konamiIdx === konami.length) {
+        konamiIdx = 0;
+        var on = doc.body.classList.toggle('misprint');
+        showToast(on ? 'Misprint: the plates slipped out of register.' : 'Back in register.');
+      }
     } else {
-      konamiIdx = (key === konami[0]) ? 1 : 0;
+      konamiIdx = key === konami[0] ? 1 : 0;
     }
   });
 
-  /* ---------- Arcade mini-game: block dodger ---------- */
-  var game = (function () {
-    var canvas = doc.getElementById('game');
-    if (!canvas) return null;
-    var ctx = canvas.getContext('2d');
-    var W = canvas.width, H = canvas.height;
+  /* ---------- ثريا: the Pleiades settle into the letter dots ---------- */
+  var thurayya = (function () {
+    var wrap = doc.getElementById('thurayya');
+    if (!wrap || !window.HTMLCanvasElement) return null;
 
-    var state = 'idle'; // idle | playing | over
-    var paddle = { x: W / 2 - 24, y: H - 18, w: 48, h: 8 };
-    var blocks = [];
-    var score = 0, lives = 3;
-    var spawnTimer = 0, last = 0, raf = null;
-    var keys = { left: false, right: false };
+    var word = wrap.querySelector('.thurayya-word');
+    var full = wrap.querySelector('.tw-full');
+    if (!word || !full) return null;
 
-    var scoreEl = doc.getElementById('game-score');
-    var livesEl = doc.getElementById('game-lives');
-    var startBtn = doc.getElementById('game-start');
+    var FULL = full.textContent.trim();
 
-    function updateHud() {
-      if (scoreEl) scoreEl.textContent = String(score);
-      if (livesEl) livesEl.textContent = String(lives);
-    }
+    // Pleiades, as fractions of the cluster box (matches the poster's cluster)
+    var STARS = [
+      [0.50, 0.46], [0.18, 0.40], [0.16, 0.66], [0.80, 0.28],
+      [0.66, 0.12], [0.72, 0.70], [0.56, 0.90]
+    ];
 
-    function draw() {
-      ctx.clearRect(0, 0, W, H);
-      ctx.fillStyle = '#2a2113';
-      ctx.fillRect(0, H - 2, W, 2);
-      ctx.fillStyle = '#ffb238';
-      ctx.fillRect(paddle.x, paddle.y, paddle.w, paddle.h);
-      ctx.fillStyle = '#ff5a4e';
-      for (var i = 0; i < blocks.length; i++) {
-        var b = blocks[i];
-        ctx.fillRect(b.x, b.y, b.w, b.h);
-      }
-      ctx.font = '12px Silkscreen, monospace';
+    var SVG = 'http://www.w3.org/2000/svg';
+
+    var layer = null;      // nodes added for the live version
+    var dots = [];         // { el, dot, star, sx, sy, ex, ey }
+    var ticking = false;
+
+    // Draws the word centred in the inner box, leaving a margin so no dot is clipped
+    function drawWord(ctx, cw, ch, pad, font, color) {
+      ctx.clearRect(0, 0, cw, ch);
+      ctx.font = font;
+      ctx.direction = 'rtl';
       ctx.textAlign = 'center';
-      if (state === 'idle') {
-        ctx.fillStyle = '#f4e7cb';
-        ctx.fillText('PRESS INSERT COIN', W / 2, H / 2);
-      } else if (state === 'over') {
-        ctx.fillStyle = '#ff5a4e';
-        ctx.fillText('GAME OVER', W / 2, H / 2);
-        ctx.fillStyle = '#f4e7cb';
-        ctx.fillText('PRESS R TO RETRY', W / 2, H / 2 + 22);
+      ctx.textBaseline = 'alphabetic';
+      ctx.fillStyle = color;
+      var m = ctx.measureText(FULL);
+      var inner = ch - 2 * pad;
+      var y = pad + (inner + m.actualBoundingBoxAscent - m.actualBoundingBoxDescent) / 2;
+      ctx.fillText(FULL, cw / 2, y);
+    }
+
+    function makeStar(size) {
+      var s = doc.createElementNS(SVG, 'svg');
+      s.setAttribute('class', 'star');
+      s.setAttribute('aria-hidden', 'true');
+      s.style.width = s.style.height = size + 'px';
+      var use = doc.createElementNS(SVG, 'use');
+      use.setAttribute('href', '#i-star');
+      s.appendChild(use);
+      return s;
+    }
+
+    // Split the drawn word into connected shapes; the small ones are its letter dots
+    function findDots(a, w, h) {
+      var mask = new Uint8Array(w * h);
+      for (var i = 0; i < w * h; i++) {
+        if (a[i * 4 + 3] > 8) mask[i] = 1;
       }
-    }
-
-    function reset() {
-      blocks = [];
-      score = 0; lives = 3;
-      paddle.x = W / 2 - 24;
-      spawnTimer = 0;
-      updateHud();
-    }
-
-    function spawn() {
-      var s = 12;
-      blocks.push({ x: Math.random() * (W - s), y: -s, w: s, h: s });
-    }
-
-    function update(dt) {
-      var dir = (keys.right ? 1 : 0) - (keys.left ? 1 : 0);
-      paddle.x += dir * 260 * dt;
-      paddle.x = Math.max(0, Math.min(W - paddle.w, paddle.x));
-
-      spawnTimer += dt;
-      if (spawnTimer > (1.0 - Math.min(0.6, score * 0.004))) {
-        spawnTimer = 0;
-        spawn();
-      }
-
-      var speed = 90 + score * 1.2;
-      for (var i = blocks.length - 1; i >= 0; i--) {
-        var b = blocks[i];
-        b.y += speed * dt;
-        if (b.y + b.h >= paddle.y && b.y <= paddle.y + paddle.h &&
-            b.x + b.w >= paddle.x && b.x <= paddle.x + paddle.w) {
-          blocks.splice(i, 1);
-          score++;
-          updateHud();
-          continue;
+      var blobs = [];
+      var stack = [];
+      for (var p = 0; p < w * h; p++) {
+        if (mask[p] !== 1) continue;
+        var blob = { minX: w, minY: h, maxX: 0, maxY: 0, px: [] };
+        mask[p] = 2;
+        stack.push(p);
+        while (stack.length) {
+          var q = stack.pop();
+          var x = q % w, y = (q / w) | 0;
+          blob.px.push(q);
+          if (x < blob.minX) blob.minX = x;
+          if (x > blob.maxX) blob.maxX = x;
+          if (y < blob.minY) blob.minY = y;
+          if (y > blob.maxY) blob.maxY = y;
+          if (x > 0 && mask[q - 1] === 1) { mask[q - 1] = 2; stack.push(q - 1); }
+          if (x < w - 1 && mask[q + 1] === 1) { mask[q + 1] = 2; stack.push(q + 1); }
+          if (y > 0 && mask[q - w] === 1) { mask[q - w] = 2; stack.push(q - w); }
+          if (y < h - 1 && mask[q + w] === 1) { mask[q + w] = 2; stack.push(q + w); }
         }
-        if (b.y > H) {
-          blocks.splice(i, 1);
-          lives--;
-          updateHud();
-          if (lives <= 0) { state = 'over'; return; }
-        }
+        blobs.push(blob);
       }
+      var largest = 0;
+      blobs.forEach(function (bl) { if (bl.px.length > largest) largest = bl.px.length; });
+      return blobs.filter(function (bl) {
+        return bl.px.length > 24 && bl.px.length < largest * 0.08;
+      });
     }
 
-    function loop(ts) {
-      if (state !== 'playing') { draw(); return; }
-      var dt = Math.min(0.05, (ts - last) / 1000 || 0);
-      last = ts;
-      update(dt);
-      draw();
-      raf = requestAnimationFrame(loop);
+    function teardown() {
+      if (layer) layer.forEach(function (n) { n.remove(); });
+      layer = null;
+      dots = [];
+      wrap.classList.remove('is-live');
+    }
+
+    function build() {
+      teardown();
+      var box = word.getBoundingClientRect();
+      var w = Math.ceil(box.width), h = Math.ceil(box.height);
+      if (!w || !h) return;
+
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var pad = Math.ceil(h * 0.2);
+      var cw = Math.ceil((w + 2 * pad) * dpr), ch = Math.ceil((h + 2 * pad) * dpr);
+      var cs = getComputedStyle(word);
+      var color = cs.color;
+      var font = cs.fontWeight + ' ' + parseFloat(cs.fontSize) * dpr + 'px ' + cs.fontFamily;
+
+      var canvas = doc.createElement('canvas');
+      canvas.width = cw;
+      canvas.height = ch;
+      var ctx = canvas.getContext('2d', { willReadFrequently: true });
+      drawWord(ctx, cw, ch, pad * dpr, font, color);
+
+      var image = ctx.getImageData(0, 0, cw, ch);
+      var da = new Uint8ClampedArray(image.data);
+      var blobs = findDots(da, cw, ch);
+
+      // Anything other than a handful of dots means an unexpected font: keep the plain word.
+      if (blobs.length < 3 || blobs.length > STARS.length) return;
+
+      // The word with its dots lifted out, drawn where the real word sits
+      blobs.forEach(function (bl) {
+        bl.px.forEach(function (q) { image.data[q * 4 + 3] = 0; });
+      });
+      ctx.putImageData(image, 0, 0);
+
+      layer = [];
+      canvas.className = 'tw-canvas';
+      canvas.style.width = w + 2 * pad + 'px';
+      canvas.style.height = h + 2 * pad + 'px';
+      canvas.style.left = canvas.style.top = -pad + 'px';
+      canvas.setAttribute('aria-hidden', 'true');
+      word.appendChild(canvas);
+      layer.push(canvas);
+
+      // The cluster hangs in the open sky the band leaves above the word, on the axis
+      var sky = box.top - wrap.getBoundingClientRect().top;
+      var clusterH = Math.min(sky * 0.8, h * 0.6), clusterW = clusterH * 1.15;
+      var cx0 = w / 2 - clusterW / 2, cy0 = -sky + (sky - clusterH) / 2;
+      var starSize = Math.max(14, clusterW * 0.2);
+
+      blobs.sort(function (p, q) { return p.minX - q.minX; });
+      var order = STARS.map(function (s, i) { return i; }).sort(function (p, q) { return STARS[p][0] - STARS[q][0]; });
+      var used = {};
+      // Spread landing dots across the cluster's stars from left to right
+      var pick = blobs.map(function (bl, i) {
+        var idx = order[Math.round(i * (order.length - 1) / Math.max(1, blobs.length - 1))];
+        while (used[idx]) idx = order[(order.indexOf(idx) + 1) % order.length];
+        used[idx] = true;
+        return idx;
+      });
+
+      blobs.forEach(function (bl, i) {
+        var bw = bl.maxX - bl.minX + 1, bh = bl.maxY - bl.minY + 1;
+        var c = doc.createElement('canvas');
+        c.width = bw;
+        c.height = bh;
+        var cx = c.getContext('2d');
+        var img = cx.createImageData(bw, bh);
+        bl.px.forEach(function (q) {
+          var x = q % cw - bl.minX, y = ((q / cw) | 0) - bl.minY;
+          var o = (y * bw + x) * 4, s = q * 4;
+          img.data[o] = da[s]; img.data[o + 1] = da[s + 1]; img.data[o + 2] = da[s + 2]; img.data[o + 3] = da[s + 3];
+        });
+        cx.putImageData(img, 0, 0);
+        c.style.width = bw / dpr + 'px';
+        c.style.height = bh / dpr + 'px';
+
+        // Each traveller is a star that becomes its letter dot as it lands
+        var el = doc.createElement('span');
+        el.className = 'tw-dot';
+        el.style.width = bw / dpr + 'px';
+        el.style.height = bh / dpr + 'px';
+        el.setAttribute('aria-hidden', 'true');
+        var star = makeStar(pick[i] === 0 ? starSize * 1.35 : starSize);
+        el.appendChild(c);
+        el.appendChild(star);
+        word.appendChild(el);
+        layer.push(el);
+
+        var at = STARS[pick[i]];
+        dots.push({
+          el: el,
+          dot: c,
+          star: star,
+          ex: bl.minX / dpr - pad,
+          ey: bl.minY / dpr - pad,
+          sx: cx0 + at[0] * clusterW - bw / dpr / 2,
+          sy: cy0 + at[1] * clusterH - bh / dpr / 2
+        });
+      });
+
+      // Stars with no letter to land in stay in the sky
+      STARS.forEach(function (at, i) {
+        if (used[i]) return;
+        var el = doc.createElement('span');
+        el.className = 'tw-dot';
+        el.setAttribute('aria-hidden', 'true');
+        el.appendChild(makeStar(i === 0 ? starSize * 1.35 : starSize));
+        el.style.transform = 'translate(' + (cx0 + at[0] * clusterW).toFixed(2) + 'px,' + (cy0 + at[1] * clusterH).toFixed(2) + 'px)';
+        word.appendChild(el);
+        layer.push(el);
+      });
+
+      wrap.classList.add('is-live');
+      update();
+    }
+
+    function ease(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+    function clamp(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
+
+    function progress() {
+      if (reduceMotion.matches) return 1;
+      var r = word.getBoundingClientRect();
+      var vh = window.innerHeight || 800;
+      return clamp((vh * 0.92 - r.top) / (vh * 0.6));
+    }
+
+    function update() {
+      ticking = false;
+      if (!dots.length) return;
+      var p = progress();
+      var n = dots.length;
+      dots.forEach(function (d, i) {
+        var t = ease(clamp((p - i * 0.07) / (1 - (n - 1) * 0.07)));
+        var x = d.sx + (d.ex - d.sx) * t;
+        var y = d.sy + (d.ey - d.sy) * t;
+        d.el.style.transform = 'translate(' + x.toFixed(2) + 'px,' + y.toFixed(2) + 'px)';
+        // The star gives way to the dot over the last stretch of the flight
+        var land = clamp((t - 0.55) / 0.45);
+        d.dot.style.opacity = land.toFixed(3);
+        d.star.style.opacity = (1 - land).toFixed(3);
+      });
+    }
+
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    }
+
+    var resizeTimer;
+    function onResize() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(build, 150);
     }
 
     function start() {
-      if (state === 'playing') return;
-      state = 'playing';
-      reset();
-      last = performance.now();
-      if (raf) cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(loop);
+      build();
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onResize);
+      reduceMotion.addEventListener('change', update);
     }
 
-    function moveTo(px) {
-      var rect = canvas.getBoundingClientRect();
-      var scale = W / (rect.width || W);
-      paddle.x = Math.max(0, Math.min(W - paddle.w, (px - rect.left) * scale - paddle.w / 2));
+    if (doc.fonts && doc.fonts.load) {
+      var cs = getComputedStyle(word);
+      doc.fonts.load(cs.fontWeight + ' 100px ' + cs.fontFamily, FULL)
+        .then(function () { return doc.fonts.ready; })
+        .then(start, start);
+    } else {
+      window.addEventListener('load', start);
     }
 
-    if (startBtn) {
-      startBtn.addEventListener('click', function () { start(); });
-    }
-
-    doc.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-        if (state !== 'over') e.preventDefault();
-      }
-      if (e.key === 'ArrowLeft') { keys.left = true; }
-      if (e.key === 'ArrowRight') { keys.right = true; }
-      if (e.key === 'r' || e.key === 'R') { if (state !== 'playing') start(); }
-    });
-    doc.addEventListener('keyup', function (e) {
-      if (e.key === 'ArrowLeft') { keys.left = false; }
-      if (e.key === 'ArrowRight') { keys.right = false; }
-    });
-
-    canvas.addEventListener('pointermove', function (e) { if (state === 'playing') moveTo(e.clientX); });
-    canvas.addEventListener('pointerdown', function (e) { if (state === 'playing') moveTo(e.clientX); });
-
-    draw();
-
-    return {
-      start: start,
-      isPlaying: function () { return state === 'playing'; }
-    };
+    return { repaint: function () { if (layer) build(); } };
   })();
 })();

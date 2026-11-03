@@ -1,30 +1,34 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wael Qubaisi — web &amp; game developer</title>
     <meta
       name="description"
-      content="Wael Qubaisi — final-year CS student, CO-founder & game programmer of Thurayya Studio. I build full-stack web platforms and games. Open to internships and COOP."
+      content="Wael Qubaisi — final-year CS student at IAU and co-founder &amp; game developer of Thurayya Studio. Full-stack web platforms and game code. Open to internship and COOP roles."
     />
     <meta name="author" content="Wael Qubaisi" />
-    <title>Wael Qubaisi · Thurayya Studio</title>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Wael Qubaisi — web &amp; game developer" />
+    <meta
+      property="og:description"
+      content="Final-year CS student at IAU and co-founder of Thurayya Studio. Full-stack web and game programming. Open to internship and COOP roles."
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta name="theme-color" content="#1B2147" />
 
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Bungee&family=IBM+Plex+Sans:wght@400;500;600;700&family=Silkscreen:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preload" href="assets/fonts/alexandria-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="assets/fonts/alexandria-arabic.woff2" as="font" type="font/woff2" crossorigin />
 
     <script>
       (function () {
         try {
-          var t = localStorage.getItem("theme");
-          if (t === "light" || t === "dark") {
-            document.documentElement.setAttribute("data-theme", t);
+          var t = localStorage.getItem("printing");
+          if (t === "day" || t === "night") {
+            document.documentElement.setAttribute("data-printing", t);
           }
         } catch (e) {}
       })();
@@ -32,752 +36,404 @@
 
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body data-reveal-root>
+  <body>
+    <svg class="sprite" aria-hidden="true" focusable="false">
+      <symbol id="i-arrow-ne" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9" /></symbol>
+      <symbol id="i-arrow-e" viewBox="0 0 24 24"><path d="M3 12h17M14 6l6 6-6 6" /></symbol>
+      <symbol id="i-arrow-w" viewBox="0 0 24 24"><path d="M21 12H4M10 6l-6 6 6 6" /></symbol>
+      <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v13M6 10l6 6 6-6M4 21h16" /></symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24"><path d="M3 5h18v14H3zM3 6l9 7 9-7" /></symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 7h18M3 12h18M3 17h18" /></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path d="M5 5l14 14M19 5 5 19" /></symbol>
+      <symbol id="i-lock" viewBox="0 0 24 24"><path d="M5 11h14v10H5zM8 11V7a4 4 0 0 1 8 0v4" /></symbol>
+      <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 0C12.9 7.6 16.4 11.1 24 12 16.4 12.9 12.9 16.4 12 24 11.1 16.4 7.6 12.9 0 12 7.6 11.1 11.1 7.6 12 0Z" /></symbol>
+    </svg>
+
     <a class="skip-link" href="#main">Skip to content</a>
 
-    <!-- ============================ HUD HEADER ============================ -->
-    <header class="hud">
-      <div class="hud-inner container">
-        <a
-          class="hud-brand"
-          href="#top"
-          aria-label="Wael Qubaisi — back to top"
-        >
-          <span class="brand-mark" aria-hidden="true">WQ</span>
-          <span class="brand-name">Wael Qubaisi</span>
+    <header class="masthead">
+      <div class="masthead-inner">
+        <a class="mark" href="#top" aria-label="Wael Qubaisi — back to top">
+          <span class="mark-dots" aria-hidden="true"><svg class="star"><use href="#i-star" /></svg><svg class="star"><use href="#i-star" /></svg><svg class="star"><use href="#i-star" /></svg><svg class="star"><use href="#i-star" /></svg><svg class="star"><use href="#i-star" /></svg><svg class="star"><use href="#i-star" /></svg><svg class="star"><use href="#i-star" /></svg></span>
+          <span class="mark-name">Wael Qubaisi</span>
         </a>
 
-        <nav class="hud-nav" id="site-nav" aria-label="Primary">
-          <ul class="hud-nav-list">
-            <li><a href="#about">About</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#achievements">Achievements</a></li>
-            <li><a href="#education">Education</a></li>
-            <li><a href="#contact">Contact</a></li>
+        <nav class="nav" id="site-nav" aria-label="Primary">
+          <ul>
+            <li><a href="#work">Work <span lang="ar" dir="rtl">الأعمال</span></a></li>
+            <li><a href="#studio">Studio <span lang="ar" dir="rtl">الاستوديو</span></a></li>
+            <li><a href="#stack">Stack <span lang="ar" dir="rtl">الأدوات</span></a></li>
+            <li><a href="#contact">Contact <span lang="ar" dir="rtl">تواصل</span></a></li>
           </ul>
         </nav>
 
-        <div class="hud-actions">
-          
-            
-            
-          </span>
-          <button
-            class="icon-btn theme-toggle"
-            id="theme-toggle"
-            type="button"
-            aria-label="Switch color theme"
-            aria-pressed="false"
-          >
-            <span class="theme-icon" aria-hidden="true">☾</span>
+        <div class="masthead-actions">
+          <button class="printing-toggle" id="printing-toggle" type="button" aria-pressed="false">
+            <span class="printing-swatch" aria-hidden="true"></span>
+            <span class="printing-label">Night</span>
           </button>
           <button
-            class="icon-btn menu-toggle"
+            class="menu-toggle"
             id="menu-toggle"
             type="button"
             aria-label="Open navigation menu"
             aria-expanded="false"
             aria-controls="site-nav"
           >
-            <span class="menu-bars" aria-hidden="true"></span>
+            <svg class="icon" aria-hidden="true"><use href="#i-menu" /></svg>
           </button>
         </div>
       </div>
     </header>
 
     <main id="main">
-      <!-- ============================ HERO ============================ -->
-      <section class="hero" id="top" aria-labelledby="hero-heading">
-        <div class="container hero-inner">
-          <div class="hero-copy" data-reveal="up">
-            <p class="eyebrow">PLAYER&nbsp;ONE&nbsp;·&nbsp;SELECT&nbsp;PATH</p>
-            <h1 class="hero-name" id="hero-heading">WAEL<br />QUBAISI</h1>
-            <p class="hero-line">
-              Co-founder of <strong>Thurayya Studio</strong> and game
-              programmer, where I work with a small team to
-              turn game ideas into working builds. Final-year CS student, focused
-              on full-stack web development and game programming. Open to
-              internship and COOP opportunities.
-            </p>
+      <!-- Poster: both tracks at once -->
+      <section class="band band--field band--axis hero" id="top" aria-labelledby="hero-name">
+        <div class="plate">
+          <h1 class="names" id="hero-name">
+            <span class="name name--lat">Wael<br />Qubaisi</span>
+            <span class="name name--ar" lang="ar" dir="rtl">وائل<br />قبيسي</span>
+          </h1>
 
-            <div class="hero-actions">
-              <a class="btn btn-primary" href="#projects">▸ Select a project</a>
-              <a
-                class="btn btn-secondary"
-                href="assets/WaelQubaisiCV.pdf"
-                download
-                >⬇ Download CV</a
-              >
-              <a class="btn btn-ghost" href="#contact">Get in touch</a>
+          <span class="cluster" aria-hidden="true"><svg class="star"><use href="#i-star" /></svg><svg class="star"><use href="#i-star" /></svg><svg class="star"><use href="#i-star" /></svg><svg class="star"><use href="#i-star" /></svg><svg class="star"><use href="#i-star" /></svg><svg class="star"><use href="#i-star" /></svg><svg class="star"><use href="#i-star" /></svg></span>
+
+          <p class="intro">
+            <span class="marked">Co-founder &amp; game developer at Thurayya Studio.</span>
+            Final-year Computer Science at IAU, building full-stack web platforms and games.
+          </p>
+
+          <div class="lanes">
+            <article class="lane lane--web" aria-labelledby="lane-web">
+              <h2 class="lane-track" id="lane-web">
+                Web
+                <svg class="icon" aria-hidden="true"><use href="#i-arrow-e" /></svg>
+              </h2>
+              <p class="lane-title">Iqraa Library</p>
+              <p class="lane-line">A multi-vendor bookstore: many sellers, one platform, separate inventories.</p>
+              <p class="lane-links">
+                <a href="https://github.com/Waelaaq/IqraaLibrary" target="_blank" rel="noopener">
+                  View code
+                  <svg class="icon" aria-hidden="true"><use href="#i-arrow-ne" /></svg>
+                </a>
+                <a href="#p-iqraa">Details</a>
+              </p>
+            </article>
+
+            <article class="lane lane--games" aria-labelledby="lane-games">
+              <h2 class="lane-track" id="lane-games">
+                <svg class="icon" aria-hidden="true"><use href="#i-arrow-w" /></svg>
+                Games <span lang="ar" dir="rtl">الألعاب</span>
+              </h2>
+              <p class="lane-title">Pexet Inc</p>
+              <p class="lane-line">Survival horror where you shift between past, present and future.</p>
+              <p class="lane-links">
+                <a href="https://store.steampowered.com/app/3905840/Pexet_Inc/" target="_blank" rel="noopener">
+                  Wishlist on Steam
+                  <svg class="icon" aria-hidden="true"><use href="#i-arrow-ne" /></svg>
+                </a>
+                <a href="#p-pexet">Details</a>
+              </p>
+            </article>
+          </div>
+        </div>
+
+        <nav class="tearoff" aria-label="Get in touch">
+          <a class="tab tab--primary" href="assets/WaelQubaisiCV.pdf" download>
+            <svg class="icon" aria-hidden="true"><use href="#i-download" /></svg>
+            <span class="tab-label">Download CV</span>
+            <span class="tab-note">PDF · IAU CS, May 2027</span>
+          </a>
+          <a class="tab tab--email" href="mailto:WaelQubaisi@hotmail.com">
+            <svg class="icon" aria-hidden="true"><use href="#i-mail" /></svg>
+            <span class="tab-label">Email</span>
+            <span class="tab-note">WaelQubaisi@hotmail.com</span>
+          </a>
+          <a class="tab" href="https://github.com/Waelaaq" target="_blank" rel="noopener">
+            <svg class="icon" aria-hidden="true"><use href="#i-arrow-ne" /></svg>
+            <span class="tab-label">GitHub</span>
+            <span class="tab-note">Waelaaq</span>
+          </a>
+          <a class="tab" href="https://www.linkedin.com/in/wael-qubaisi-08874733a/" target="_blank" rel="noopener">
+            <svg class="icon" aria-hidden="true"><use href="#i-arrow-ne" /></svg>
+            <span class="tab-label">LinkedIn</span>
+            <span class="tab-note">wael-qubaisi</span>
+          </a>
+          <p class="tab tab--static">
+            <span class="tab-label">Khobar, KSA</span>
+            <span class="tab-note">Open to internship / COOP</span>
+          </p>
+        </nav>
+      </section>
+
+      <!-- Work -->
+      <section class="band band--paper band--axis" id="work" aria-labelledby="work-heading">
+        <div class="plate">
+          <h2 class="band-heading" id="work-heading">
+            <span>Work</span>
+            <span lang="ar" dir="rtl">الأعمال</span>
+          </h2>
+          <p class="band-line"><span class="marked">Two tracks, one person: web systems and game code.</span></p>
+
+          <div class="work-grid">
+            <div class="column column--web">
+              <h3 class="column-track">
+                Web
+                <svg class="icon" aria-hidden="true"><use href="#i-arrow-e" /></svg>
+              </h3>
+
+              <article class="project" id="p-iqraa" aria-labelledby="p-iqraa-title">
+                <div class="cover cover--iqraa" aria-hidden="true">
+                  <span class="cover-ar" lang="ar" dir="rtl">اقرأ</span>
+                </div>
+                <h4 class="project-title" id="p-iqraa-title">Iqraa Library</h4>
+                <p class="project-promise">Many vendors sell books on one platform, each with their own inventory and transactions.</p>
+                <table class="spec">
+                  <tr><th scope="row">Stack</th><td>PHP · MySQL · JavaScript</td></tr>
+                  <tr><th scope="row">Built</th><td>A normalized relational schema that keeps vendor and customer transactions consistent.</td></tr>
+                  <tr>
+                    <th scope="row">Links</th>
+                    <td>
+                      <a href="https://github.com/Waelaaq/IqraaLibrary" target="_blank" rel="noopener">
+                        Code on GitHub
+                        <svg class="icon" aria-hidden="true"><use href="#i-arrow-ne" /></svg>
+                      </a>
+                    </td>
+                  </tr>
+                </table>
+                <p class="ticket"><span>Web</span><span>Jun 2026</span><span>Code public</span></p>
+              </article>
+
+              <article class="project project--plain" id="p-events" aria-labelledby="p-events-title">
+                <h4 class="project-title" id="p-events-title">Event Management System</h4>
+                <p class="project-promise">University events end to end: registration, sign-in, and separate roles for admins, organizers and students.</p>
+                <table class="spec">
+                  <tr><th scope="row">Stack</th><td>Django REST Framework · MySQL · React · Vite · Tailwind</td></tr>
+                  <tr><th scope="row">Built</th><td>Role-based access control over a normalized schema with complex constraints.</td></tr>
+                  <tr><th scope="row">Links</th><td>Repository not public</td></tr>
+                </table>
+                <p class="ticket"><span>Web</span><span>2025</span><span>Full-stack</span></p>
+              </article>
             </div>
 
-            <ul class="meta-line" aria-label="Location and status">
-              <li><span class="meta-tag">LOC</span> Khobar, KSA</li>
-              <li><span class="meta-tag">GRAD</span> IAU · May 2027</li>
-              <li>
-                <span class="meta-tag">STATUS</span> Open to internship / COOP
-              </li>
+            <div class="column column--games">
+              <h3 class="column-track">
+                <svg class="icon" aria-hidden="true"><use href="#i-arrow-w" /></svg>
+                Games <span lang="ar" dir="rtl">الألعاب</span>
+              </h3>
+
+              <article class="project" id="p-pexet" aria-labelledby="p-pexet-title">
+                <div class="cover cover--image">
+                  <img
+                    src="assets/pexet.jpg"
+                    width="460"
+                    height="215"
+                    alt="Pexet Inc key art: the game's logo beside a uniformed guard holding a pistol amid crackling electricity."
+                    loading="lazy"
+                  />
+                </div>
+                <h4 class="project-title" id="p-pexet-title">Pexet Inc</h4>
+                <p class="project-promise">A top-down 2D survival-horror adventure: shift between past, present and future to survive a corrupted research facility.</p>
+                <table class="spec">
+                  <tr><th scope="row">Stack</th><td>Unity · C#</td></tr>
+                  <tr><th scope="row">Game</th><td>Timeline shifting, survival combat with parry and stun, and puzzles that change across time.</td></tr>
+                  <tr><th scope="row">Built</th><td>State management, a game-loop architecture, and modular object-oriented systems for entities and assets.</td></tr>
+                  <tr>
+                    <th scope="row">Links</th>
+                    <td>
+                      <a href="https://store.steampowered.com/app/3905840/Pexet_Inc/" target="_blank" rel="noopener">
+                        Steam page
+                        <svg class="icon" aria-hidden="true"><use href="#i-arrow-ne" /></svg>
+                      </a>
+                      <span class="spec-note">
+                        <svg class="icon" aria-hidden="true"><use href="#i-lock" /></svg>
+                        Code private
+                      </span>
+                    </td>
+                  </tr>
+                </table>
+                <p class="ticket"><span>Games</span><span>2025 —</span><span>Thurayya Studio</span></p>
+              </article>
+
+              <article class="project project--plain" aria-labelledby="p-gdu-title">
+                <h4 class="project-title" id="p-gdu-title">Game Development Unit, IAU</h4>
+                <p class="project-promise">Built software and games for university events as Game Developer &amp; Tech Lead.</p>
+                <table class="spec">
+                  <tr><th scope="row">Role</th><td>Game Developer &amp; Tech Lead</td></tr>
+                  <tr><th scope="row">Noted</th><td>Top Volunteer, 100+ service hours</td></tr>
+                </table>
+                <p class="ticket"><span>Games</span><span>IAU</span><span>Volunteer</span></p>
+              </article>
+            </div>
+          </div>
+
+          <p class="more">
+            More on GitHub: a Java &amp; MySQL pharmacy management system, parallel programming in Python, and C++ and OOP coursework.
+            <a href="https://github.com/Waelaaq?tab=repositories" target="_blank" rel="noopener">
+              All repositories
+              <svg class="icon" aria-hidden="true"><use href="#i-arrow-ne" /></svg>
+            </a>
+          </p>
+        </div>
+      </section>
+
+      <!-- Studio -->
+      <section class="band band--field band--axis studio" id="studio" aria-labelledby="studio-heading">
+        <div class="plate">
+          <h2 class="band-heading" id="studio-heading">
+            <span>Thurayya Studio</span>
+            <span lang="ar" dir="rtl">استوديو ثريا</span>
+          </h2>
+
+          <div class="thurayya" id="thurayya">
+            <p class="thurayya-word" lang="ar" dir="rtl">
+              <span class="tw-full">ثريا</span>
+            </p>
+            <p class="thurayya-gloss">Thurayya is the Arabic name for the Pleiades.</p>
+          </div>
+
+          <div class="studio-body">
+            <p class="band-line"><span class="marked">Crafting timelines: our debut game, Pexet Inc, is in active development.</span></p>
+            <table class="spec spec--wide">
+              <tr><th scope="row">Role</th><td>Co-founder &amp; Game Developer</td></tr>
+              <tr><th scope="row">Team</th><td>Four co-founders, with freelance artists and a programmer</td></tr>
+              <tr><th scope="row">Since</th><td>January 2025 — present</td></tr>
+              <tr><th scope="row">Based</th><td>Dammam, KSA</td></tr>
+              <tr>
+                <th scope="row">Site</th>
+                <td>
+                  <a href="https://thurayyastudio.com" target="_blank" rel="noopener">
+                    thurayyastudio.com
+                    <svg class="icon" aria-hidden="true"><use href="#i-arrow-ne" /></svg>
+                  </a>
+                </td>
+              </tr>
+            </table>
+            <ul class="studio-list">
+              <li>Set up the studio from scratch, from code architecture to team coordination.</li>
+              <li>Led development across multiple projects on Git and GitHub to keep the team in sync.</li>
+              <li>Working with designers, artists and developers on the debut game.</li>
             </ul>
           </div>
+        </div>
+      </section>
 
-          <aside class="player-card" data-reveal="pop">
-            <div class="player-card-header">
-              <span class="player-card-name">PLAYER.CARD</span>
-              <span class="player-card-warn">LIVE</span>
-            </div>
-            <div class="player-portrait" aria-hidden="true">
-              <svg viewBox="0 0 16 16" shape-rendering="crispEdges">
-                <rect x="3" y="1" width="10" height="7" fill="var(--accent)" />
-                <rect x="1" y="2" width="2" height="4" fill="var(--accent)" />
-                <rect x="13" y="2" width="2" height="4" fill="var(--accent)" />
-                <rect x="5" y="8" width="6" height="2" fill="var(--accent-strong)" />
-                <rect x="6" y="10" width="4" height="2" fill="var(--accent)" />
-                <rect x="3" y="13" width="10" height="2" fill="var(--muted)" />
-              </svg>
-            </div>
-            <dl class="player-stats">
-              <div class="player-stat">
-                <dt>EXP — TIME TO GRADUATE</dt>
-                <dd class="hp">
-                  <span class="hp-fill" style="--hp: 95%"></span>
-                </dd>
+      <!-- Stack -->
+      <section class="band band--paper band--axis" id="stack" aria-labelledby="stack-heading">
+        <div class="plate">
+          <h2 class="band-heading" id="stack-heading">
+            <span>Stack</span>
+            <span lang="ar" dir="rtl">الأدوات</span>
+          </h2>
+          <p class="band-line"><span class="marked">Core in SQL, JavaScript, HTML/CSS, Python, Java and C#.</span></p>
+
+          <div class="stack-grid">
+            <dl class="stack-column">
+              <div class="stack-group">
+                <dt>Languages, core</dt>
+                <dd>SQL</dd><dd>JavaScript</dd><dd>HTML/CSS</dd><dd>Python</dd><dd>Java</dd><dd>C#</dd>
               </div>
-              <div class="player-stat">
-
+              <div class="stack-group">
+                <dt>Languages, familiar</dt>
+                <dd>PHP</dd><dd>C++</dd>
+              </div>
+              <div class="stack-group">
+                <dt>Web &amp; backend</dt>
+                <dd>React.js</dd><dd>Node.js</dd><dd>REST APIs</dd>
               </div>
             </dl>
-            <p class="player-hint blink">
-              PRESS&nbsp;START&nbsp;—&nbsp;TRY&nbsp;THE&nbsp;DEMO&nbsp;↓
-            </p>
-          </aside>
-        </div>
-      </section>
-
-      <!-- ============================ ABOUT / CHARACTER SHEET ============================ -->
-      <section class="section about" id="about" aria-labelledby="about-heading">
-        <div class="container">
-          <div class="section-head" data-reveal="up">
-            <p class="eyebrow">CHARACTER SHEET</p>
-            <h2 class="section-title" id="about-heading">Who am I</h2>
-          </div>
-
-          <div class="about-grid">
-            <div class="about-copy" data-reveal="left">
-              <p>
-                Final-year Computer Science student at <strong>IAU</strong> and
-                co-founder &amp; game programmer of
-                <strong>Thurayya Studio</strong>. I take projects from a blank
-                file to something people actually use — web platforms, game
-                systems, and the architecture that holds them together.
-              </p>
-              <p>
-                Right now I'm looking for an
-                <strong>internship or COOP role</strong> where I can apply my skills and bring the game-studio mindset into a professional setting.
-              </p>
-            </div>
-
-            <div class="about-stats" data-reveal="right">
-              <div class="stat">
-                <span class="stat-label">EXPECTED GRADUATION</span>
-                <span class="stat-value">2027</span>
-                <span class="stat-bar"
-                  ><span class="stat-fill" style="--w: 95%"></span
-                ></span>
+            <dl class="stack-column stack-column--mirror">
+              <div class="stack-group">
+                <dt>Games</dt>
+                <dd>Godot</dd><dd>Unity</dd><dd>GDScript</dd>
               </div>
-              <div class="stat">
-                <span class="stat-label">VOLUNTEER HOURS</span>
-                <span class="stat-value">100+</span>
-                <span class="stat-bar"
-                  ><span class="stat-fill" style="--w: 85%"></span
-                ></span>
+              <div class="stack-group">
+                <dt>Tools</dt>
+                <dd>Git</dd><dd>GitHub</dd><dd>Linux</dd><dd>VS Code</dd>
               </div>
-              <div class="stat">
-                <span class="stat-label">PROJECTS BUILT</span>
-                <span class="stat-value">10</span>
-                <span class="stat-bar"
-                  ><span class="stat-fill" style="--w: 80%"></span
-                ></span>
+              <div class="stack-group">
+                <dt>Concepts</dt>
+                <dd>OOP</dd><dd>Software engineering</dd><dd>Data structures</dd><dd>Algorithms</dd><dd>Database normalization</dd><dd>System design</dd>
               </div>
-            </div>
+              <div class="stack-group">
+                <dt>Speaks</dt>
+                <dd>Arabic, native</dd><dd>English, fluent</dd>
+              </div>
+            </dl>
           </div>
         </div>
       </section>
 
-      <!-- ============================ EXPERIENCE / QUEST LOG ============================ -->
-      <section
-        class="section quest"
-        id="experience"
-        aria-labelledby="experience-heading"
-      >
-        <div class="container">
-          <div class="section-head" data-reveal="up">
-            <p class="eyebrow">QUEST LOG</p>
-            <h2 class="section-title" id="experience-heading">
-              Where I've worked
-            </h2>
-          </div>
-
-          <ol class="quest-list">
-            <li class="quest-item" data-reveal="up">
-              <span class="quest-marker" aria-hidden="true"></span>
-              <article class="quest-card">
-                <div class="quest-card-head">
-                  <span class="quest-status">ACTIVE&nbsp;QUEST</span>
-                  <span class="quest-date"
-                    >JAN&nbsp;2025&nbsp;—&nbsp;PRESENT</span
-                  >
-                </div>
-                <h3 class="quest-title">Co-founder &amp; Game Programmer</h3>
-                <p class="quest-org">
-                  <a
-                    href="https://thurayyastudio.com"
-                    target="_blank"
-                    rel="noopener"
-                    >thurayyastudio.com</a
-                  >
-                  &nbsp;·&nbsp; Dammam, KSA
-                </p>
-                <ul class="quest-bullets">
-                  <li>
-                    Co-founded the studio from scratch with a small team — code architecture through
-                    team coordination.
-                  </li>
-                  <li>
-                    Led development across multiple projects on Git/GitHub to
-                    keep the team in sync.
-                  </li>
-                  <li>
-                    In active development on our debut game, working with
-                    designers, artists, and developers.
-                  </li>
-                </ul>
-              </article>
-            </li>
-          </ol>
-        </div>
-      </section>
-
-      <!-- ============================ PROJECTS / SELECT GAME ============================ -->
-      <section
-        class="section select"
-        id="projects"
-        aria-labelledby="projects-heading"
-      >
-        <div class="container">
-          <div class="section-head" data-reveal="up">
-            <p class="eyebrow">SELECT YOUR GAME</p>
-            <h2 class="section-title" id="projects-heading">Projects</h2>
-            <p class="section-sub">Pick a cartridge to read more.</p>
-          </div>
-
-          <div class="select-grid">
-            <article class="project-card p-cart" data-reveal="up">
-              <div class="project-thumb">
-                <img
-                  src="assets/iqraa.svg"
-                  alt="Placeholder screenshot for Iqraa Library"
-                  loading="lazy"
-                />
-              </div>
-              <div class="project-body">
-                <div class="project-tags">
-                  <span class="tag">PHP</span>
-                  <span class="tag">MySQL</span>
-                  <span class="tag">JavaScript</span>
-                </div>
-                <h3 class="project-title">Iqraa Library</h3>
-                <p class="project-meta">Multi-vendor bookstore · Jun 2026</p>
-                <p class="project-desc">
-                  One platform where multiple vendors list and sell books, each
-                  with their own inventory and transaction tracking.
-                </p>
-                <details class="project-details">
-                  <summary class="details-toggle">Read more</summary>
-                  <div class="details-content">
-                    <p>
-                      A normalized relational schema keeps data integrity across
-                      vendor and user transactions, letting independent vendors
-                      manage their own inventory on one platform.
-                    </p>
-                  </div>
-                </details>
-              </div>
-            </article>
-
-            <article class="project-card p-event" data-reveal="up">
-              <div class="project-thumb">
-                <img
-                  src="assets/eventms.svg"
-                  alt="Placeholder screenshot for Event Management System"
-                  loading="lazy"
-                />
-              </div>
-              <div class="project-body">
-                <div class="project-tags">
-                  <span class="tag">Django REST Framework</span>
-                  <span class="tag">MySQL</span>
-                  <span class="tag">React</span>
-                  <span class="tag">Vite</span>
-                  <span class="tag">Tailwind</span>
-                </div>
-                <h3 class="project-title">Event Management System</h3>
-                <p class="project-meta">Fullstack system · 2025</p>
-                <p class="project-desc">
-                  Managing university events end-to-end — registrations,
-                  authentication, and role-based access for admins, students,
-                  and organizers.
-                </p>
-                <details class="project-details">
-                  <summary class="details-toggle">Read more</summary>
-                  <div class="details-content">
-                    <p>
-                      Role-based access control restricts admin, organizer and
-                      participant actions, backed by a normalized schema with
-                      complex constraints.
-                    </p>
-                  </div>
-                </details>
-              </div>
-            </article>
-
-            <article class="project-card p-game" data-reveal="up">
-              <div class="project-thumb">
-                <img
-                  class="pexet-image"
-                  src="assets/pexet.jpg"
-                  alt="Placeholder screenshot for Pexet Inc"
-                  loading="lazy"
-                />
-              </div>
-              <div class="project-body">
-                <div class="project-tags">
-                  <span class="tag">Godot</span>
-                  <span class="tag">Unity</span>
-                  <span class="tag">GDScript</span>
-                  <span class="tag">C#</span>
-                </div>
-                <h3 class="project-title">Pexet Inc</h3>
-                <p class="project-meta">Game · 2025</p>
-                <p class="project-desc">
-                  A game in active development — state management, a game-loop
-                  architecture, and modular OOP design for entities and assets.
-                </p>
-                <details class="project-details">
-                  <summary class="details-toggle">Read more</summary>
-                  <div class="details-content">
-                    <p>
-                      Built with modular object-oriented design: state
-                      management, a game-loop architecture, and modular systems
-                      for entities and assets.
-                    </p>
-                  </div>
-                </details>
-              </div>
-            </article>
+      <!-- Education -->
+      <section class="band band--ink band--axis" id="education" aria-labelledby="education-heading">
+        <div class="plate edu">
+          <h2 class="band-heading" id="education-heading">
+            <span>Education</span>
+            <span lang="ar" dir="rtl">الدراسة</span>
+          </h2>
+          <div class="edu-body">
+            <p class="edu-school">Imam Abdulrahman Bin Faisal University</p>
+            <p class="edu-degree">Bachelor of Science in Computer Science <span class="marked">Expected May 2027</span></p>
           </div>
         </div>
       </section>
 
-      <!-- ============================ SKILLS / LOADOUT ============================ -->
-      <section
-        class="section loadout"
-        id="skills"
-        aria-labelledby="skills-heading"
-      >
-        <div class="container">
-          <div class="section-head" data-reveal="up">
-            <p class="eyebrow">LOADOUT</p>
-            <h2 class="section-title" id="skills-heading">What I work with</h2>
-          </div>
-
-          <div class="loadout-grid">
-            <div class="loadout-group lg-wide" data-reveal="left">
-              <h3 class="loadout-title">Core</h3>
-              <ul class="chip-list">
-                <li class="chip">SQL</li>
-                <li class="chip">JavaScript</li>
-                <li class="chip">HTML/CSS</li>
-                <li class="chip">Python</li>
-              </ul>
-            </div>
-
-            <div class="loadout-group" data-reveal="right">
-              <h3 class="loadout-title">Familiar</h3>
-              <ul class="chip-list">
-                <li class="chip">Java</li>
-                <li class="chip">C#</li>
-                <li class="chip">PHP</li>
-                <li class="chip">C++</li>
-              </ul>
-            </div>
-
-            <div class="loadout-group" data-reveal="left">
-              <h3 class="loadout-title">Web &amp; Backend</h3>
-              <ul class="chip-list">
-                <li class="chip">React.js</li>
-                <li class="chip">Node.js</li>
-                <li class="chip">Django REST Framework</li>
-                <li class="chip">REST APIs</li>
-              </ul>
-            </div>
-
-            <div class="loadout-group lg-wide" data-reveal="right">
-              <h3 class="loadout-title">Tools</h3>
-              <ul class="chip-list">
-                <li class="chip">Git</li>
-                <li class="chip">GitHub</li>
-                <li class="chip">Linux</li>
-                <li class="chip">VS Code</li>
-                <li class="chip">Godot</li>
-                <li class="chip">Unity</li>
-              </ul>
-            </div>
-
-            <div class="loadout-group" data-reveal="left">
-              <h3 class="loadout-title">Concepts</h3>
-              <ul class="chip-list">
-                <li class="chip">OOP</li>
-                <li class="chip">Data Structures</li>
-                <li class="chip">Algorithms</li>
-                <li class="chip">Database Normalization</li>
-                <li class="chip">System Design</li>
-              </ul>
-            </div>
-
-            <div class="loadout-group" data-reveal="right">
-              <h3 class="loadout-title">Languages</h3>
-              <ul class="chip-list">
-                <li class="chip">Arabic (Native)</li>
-                <li class="chip">English (Fluent)</li>
-              </ul>
-            </div>
-          </div>
+      <!-- Contact -->
+      <section class="band band--field band--axis contact" id="contact" aria-labelledby="contact-heading">
+        <div class="plate">
+          <h2 class="contact-heading" id="contact-heading">
+            <span class="name--lat">Let's work together</span>
+            <span class="name--ar" lang="ar" dir="rtl">لنعمل معًا</span>
+          </h2>
+          <p class="band-line"><span class="marked">Open to internship and COOP roles.</span> Based in Khobar, KSA.</p>
         </div>
-      </section>
 
-      <!-- ============================ ACHIEVEMENTS / TROPHIES ============================ -->
-      <section
-        class="section trophy"
-        id="achievements"
-        aria-labelledby="achievements-heading"
-      >
-        <div class="container">
-          <div class="section-head" data-reveal="up">
-            <p class="eyebrow">ACHIEVEMENTS</p>
-            <h2 class="section-title" id="achievements-heading">
-              Recognition &amp; highlights
-            </h2>
-          </div>
-
-          <div class="trophy-list">
-            <article class="trophy-card" data-reveal="up">
-              <span class="trophy-icon" aria-hidden="true">
-                <svg viewBox="0 0 16 16" shape-rendering="crispEdges">
-                  <rect
-                    x="3"
-                    y="1"
-                    width="10"
-                    height="7"
-                    fill="var(--accent)"
-                  />
-                  <rect x="1" y="2" width="2" height="4" fill="var(--accent)" />
-                  <rect
-                    x="13"
-                    y="2"
-                    width="2"
-                    height="4"
-                    fill="var(--accent)"
-                  />
-                  <rect
-                    x="5"
-                    y="8"
-                    width="6"
-                    height="2"
-                    fill="var(--accent-strong)"
-                  />
-                  <rect
-                    x="6"
-                    y="10"
-                    width="4"
-                    height="2"
-                    fill="var(--accent)"
-                  />
-                  <rect
-                    x="3"
-                    y="13"
-                    width="10"
-                    height="2"
-                    fill="var(--muted)"
-                  />
-                </svg>
-              </span>
-              <div class="trophy-info">
-                <span class="trophy-badge">UNLOCKED</span>
-                <h3 class="trophy-title">Game Development Unit — IAU</h3>
-                <p class="trophy-role">Game Developer &amp; Tech Lead</p>
-                <p class="trophy-desc">
-                  Built software and games for university events; recognized as
-                  Top Volunteer with 100+ service hours.
-                </p>
-              </div>
-            </article>
-
-            <article class="trophy-card" data-reveal="up">
-              <span class="trophy-icon" aria-hidden="true">
-                <svg viewBox="0 0 16 16" shape-rendering="crispEdges">
-                  <rect x="6" y="0" width="4" height="1" fill="var(--accent)" />
-                  <rect x="5" y="1" width="6" height="6" fill="var(--accent)" />
-                  <rect
-                    x="4"
-                    y="4"
-                    width="1"
-                    height="3"
-                    fill="var(--accent-strong)"
-                  />
-                  <rect
-                    x="11"
-                    y="4"
-                    width="1"
-                    height="3"
-                    fill="var(--accent-strong)"
-                  />
-                  <rect x="6" y="7" width="4" height="1" fill="var(--accent)" />
-                  <rect x="6" y="8" width="1" height="4" fill="var(--signal)" />
-                  <rect x="9" y="8" width="1" height="4" fill="var(--signal)" />
-                  <rect x="7" y="9" width="2" height="3" fill="var(--signal)" />
-                  <rect
-                    x="5"
-                    y="10"
-                    width="6"
-                    height="1"
-                    fill="var(--signal)"
-                  />
-                </svg>
-              </span>
-              <div class="trophy-info">
-                <span class="trophy-badge">UNLOCKED</span>
-                <h3 class="trophy-title">Thurayya Studio</h3>
-                <p class="trophy-role">Startup Founder</p>
-                <p class="trophy-desc">
-                  Scaled from an idea to an operating studio while keeping a
-                  full academic course load.
-                </p>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============================ EDUCATION / SAVE DATA ============================ -->
-      <section
-        class="section save"
-        id="education"
-        aria-labelledby="education-heading"
-      >
-        <div class="container">
-          <div class="section-head" data-reveal="up">
-            <p class="eyebrow">SAVE FILE</p>
-            <h2 class="section-title" id="education-heading">
-              Where I studied
-            </h2>
-          </div>
-
-          <div class="save-card" data-reveal="pop">
-            <div class="save-slot">SLOT&nbsp;01</div>
-            <div class="save-info">
-              <h3 class="save-school">
-                Imam Abdulrahman Bin Faisal University (IAU)
-              </h3>
-              <p class="save-degree">Bachelor of Science in Computer Science</p>
-              <p class="save-date">Expected: May 2027</p>
-            </div>
-            <span class="save-continue blink">CONTINUE&nbsp;▸</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============================ ARCADE MINI-GAME ============================ -->
-      <section
-        class="section arcade"
-        id="arcade"
-        aria-labelledby="arcade-heading"
-      >
-        <div class="container">
-          <div class="section-head" data-reveal="up">
-            <p class="eyebrow">INSERT&nbsp;COIN</p>
-            <h2 class="section-title" id="arcade-heading">Dodge the blocks</h2>
-            <p class="section-sub">
-              A tiny game I made for fun. Move the bar
-              with ← → or drag.
-            </p>
-          </div>
-
-          <div class="arcade-body" data-reveal="up">
-            <div class="arcade-screen">
-              <canvas
-                id="game"
-                width="360"
-                height="240"
-                aria-label="Block dodger mini game"
-              ></canvas>
-              <div class="arcade-hud">
-                <span>SCORE&nbsp;<strong id="game-score">0</strong></span>
-                <span>LIVES&nbsp;<strong id="game-lives">3</strong></span>
-              </div>
-            </div>
-            <div class="arcade-side">
-              <button class="btn btn-primary" id="game-start" type="button">
-                INSERT&nbsp;COIN
-              </button>
-              <p class="arcade-note">
-                ← → move · R restart<br />Falling blocks cost a life.<br />Catch
-                them to score.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============================ CONTACT / LOBBY ============================ -->
-      <section
-        class="section lobby"
-        id="contact"
-        aria-labelledby="contact-heading"
-      >
-        <div class="container">
-          <div class="section-head" data-reveal="up">
-            <p class="eyebrow">MULTIPLAYER&nbsp;LOBBY</p>
-            <h2 class="section-title" id="contact-heading">Let's team up</h2>
-            <p class="section-sub">
-              Open to internship and COOP opportunities — reach me on any
-              channel.
-            </p>
-          </div>
-
-          <div class="lobby-grid">
-            <a
-              class="lobby-card"
-              href="mailto:WaelQubaisi@hotmail.com"
-              data-reveal="up"
-            >
-              <span class="lobby-slot">P1</span>
-              <span class="lobby-icon" aria-hidden="true">
-                <svg viewBox="0 0 16 16" shape-rendering="crispEdges">
-                  <rect
-                    x="2"
-                    y="3"
-                    width="12"
-                    height="10"
-                    fill="var(--accent)"
-                  />
-                  <rect x="3" y="5" width="10" height="1" fill="var(--panel)" />
-                  <rect x="3" y="7" width="10" height="1" fill="var(--panel)" />
-                  <rect x="3" y="9" width="10" height="1" fill="var(--panel)" />
-                </svg>
-              </span>
-              <span class="lobby-label">EMAIL</span>
-              <span class="lobby-value">WaelQubaisi@hotmail.com</span>
-            </a>
-
-            <a
-              class="lobby-card"
-              href="https://github.com/Waelaaq"
-              target="_blank"
-              rel="noopener"
-              data-reveal="up"
-            >
-              <span class="lobby-slot">P2</span>
-              <span class="lobby-icon" aria-hidden="true">
-                <svg viewBox="0 0 16 16" shape-rendering="crispEdges">
-                  <rect
-                    x="3"
-                    y="1"
-                    width="10"
-                    height="10"
-                    fill="var(--accent)"
-                  />
-                  <rect x="4" y="2" width="8" height="8" fill="var(--panel)" />
-                  <rect x="5" y="3" width="6" height="6" fill="var(--accent)" />
-                  <rect x="6" y="4" width="4" height="4" fill="var(--panel)" />
-                </svg>
-              </span>
-              <span class="lobby-label">GITHUB</span>
-              <span class="lobby-value">github.com/Waelaaq</span>
-            </a>
-
-            <a
-              class="lobby-card"
-              href="https://www.linkedin.com/in/wael-qubaisi-08874733a/"
-              target="_blank"
-              rel="noopener"
-              data-reveal="up"
-            >
-              <span class="lobby-slot">P3</span>
-              <span class="lobby-icon" aria-hidden="true">
-                <svg viewBox="0 0 16 16" shape-rendering="crispEdges">
-                  <rect
-                    x="2"
-                    y="3"
-                    width="12"
-                    height="10"
-                    fill="var(--accent)"
-                  />
-                  <rect x="4" y="4" width="3" height="3" fill="var(--panel)" />
-                  <rect x="4" y="9" width="3" height="3" fill="var(--panel)" />
-                  <rect x="9" y="6" width="3" height="6" fill="var(--panel)" />
-                  <rect x="9" y="4" width="3" height="1" fill="var(--panel)" />
-                </svg>
-              </span>
-              <span class="lobby-label">LINKEDIN</span>
-              <span class="lobby-value">linkedin.com/in/wael-qubaisi</span>
-            </a>
-          </div>
-
-          <div class="lobby-cta" data-reveal="up">
-            <a class="btn btn-primary" href="mailto:WaelQubaisi@hotmail.com"
-              >▸ Send me an email</a
-            >
-          </div>
-        </div>
+        <nav class="tearoff tearoff--large" aria-label="Contact">
+          <a class="tab tab--primary" href="assets/WaelQubaisiCV.pdf" download>
+            <svg class="icon" aria-hidden="true"><use href="#i-download" /></svg>
+            <span class="tab-label">Download CV</span>
+            <span class="tab-note">PDF</span>
+          </a>
+          <a class="tab tab--email" href="mailto:WaelQubaisi@hotmail.com">
+            <svg class="icon" aria-hidden="true"><use href="#i-mail" /></svg>
+            <span class="tab-label">Email</span>
+            <span class="tab-note">WaelQubaisi@hotmail.com</span>
+          </a>
+          <a class="tab" href="https://github.com/Waelaaq" target="_blank" rel="noopener">
+            <svg class="icon" aria-hidden="true"><use href="#i-arrow-ne" /></svg>
+            <span class="tab-label">GitHub</span>
+            <span class="tab-note">Waelaaq</span>
+          </a>
+          <a class="tab" href="https://www.linkedin.com/in/wael-qubaisi-08874733a/" target="_blank" rel="noopener">
+            <svg class="icon" aria-hidden="true"><use href="#i-arrow-ne" /></svg>
+            <span class="tab-label">LinkedIn</span>
+            <span class="tab-note">in/wael-qubaisi</span>
+          </a>
+          <a class="tab" href="https://x.com/Waelaaqa2" target="_blank" rel="noopener">
+            <svg class="icon" aria-hidden="true"><use href="#i-arrow-ne" /></svg>
+            <span class="tab-label">X</span>
+            <span class="tab-note">@Waelaaqa2</span>
+          </a>
+        </nav>
       </section>
     </main>
 
-    <!-- ============================ FOOTER / PRESS START ============================ -->
-    <footer class="continue">
-      <div class="container continue-inner">
-        <div class="continue-brand">
-          <span class="brand-mark" aria-hidden="true">WQ</span>
-          <span>Wael Qubaisi</span>
-        </div>
-        <ul class="continue-links">
-          <li>
-            <a href="https://github.com/Waelaaq" target="_blank" rel="noopener"
-              >GitHub</a
-            >
-          </li>
-          <li>
-            <a
-              href="https://www.linkedin.com/in/wael-qubaisi-08874733a/"
-              target="_blank"
-              rel="noopener"
-              >LinkedIn</a
-            >
-          </li>
-          <li><a href="mailto:WaelQubaisi@hotmail.com">Email</a></li>
-        </ul>
-        <p class="continue-note">
-          © <span id="year">2026</span> Wael Qubaisi · made with HTML, CSS &amp;
-          vanilla JS.
-        </p>
-        <p class="continue-hint">
-          ↑&nbsp;↑&nbsp;↓&nbsp;↓&nbsp;←&nbsp;→&nbsp;←&nbsp;→&nbsp;B&nbsp;A
-        </p>
-      </div>
+    <footer class="colophon">
+      <p>© <span id="year">2026</span> Wael Qubaisi · Set in Alexandria &amp; Readex Pro, printed in HTML, CSS and vanilla JS.</p>
+      <p class="colophon-hint" aria-hidden="true">↑ ↑ ↓ ↓ ← → ← → B A</p>
     </footer>
 
-    <div class="toast" id="cheat-toast" role="status" aria-live="polite"></div>
+    <div class="dock" id="dock">
+      <a class="dock-btn dock-btn--primary" href="assets/WaelQubaisiCV.pdf" download>
+        <svg class="icon" aria-hidden="true"><use href="#i-download" /></svg>
+        Download CV
+      </a>
+      <a class="dock-btn" href="mailto:WaelQubaisi@hotmail.com">
+        <svg class="icon" aria-hidden="true"><use href="#i-mail" /></svg>
+        Email
+      </a>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
     <script src="script.js"></script>
   </body>
