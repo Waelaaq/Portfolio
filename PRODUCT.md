@@ -12,7 +12,7 @@ Recruiters and hiring managers screening Wael Qubaisi for a CS internship or COO
 
 ## Product Purpose
 
-A single-page personal portfolio for Wael Qubaisi, a final-year Computer Science student at Imam Abdulrahman Bin Faisal University (IAU, expected graduation May 2027) and co-founder & game developer of Thurayya Studio. It exists to land an internship or COOP offer. Success means a visitor leaves with a clear read on Wael's range across full-stack web and game programming, and either downloads the CV or reaches out.
+A single-page personal portfolio for Wael Qubaisi, a final-year Computer Science student at Imam Abdulrahman Bin Faisal University (IAU, expected graduation June 2027) and co-founder & game developer of Thurayya Studio. It exists to land an internship or COOP offer. Success means a visitor leaves with a clear read on Wael's range across full-stack web and game programming, and either downloads the CV or reaches out.
 
 ## Positioning
 
