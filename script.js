@@ -1,9 +1,3 @@
-/* ============================================================
-   Wael Qubaisi — Portfolio
-   Vanilla JS. Printing toggle, mobile nav, active section,
-   the mobile dock, a Konami misprint, and the ثريا dot-settle.
-   No dependencies, no build step.
-   ============================================================ */
 
 (function () {
   'use strict';
@@ -14,7 +8,7 @@
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   var prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
-  /* ---------- Day / night printing ---------- */
+  /* Day night printing */
   var printingToggle = doc.getElementById('printing-toggle');
 
   function currentPrinting() {
@@ -45,7 +39,7 @@
   });
   syncPrintingToggle();
 
-  /* ---------- Mobile navigation ---------- */
+  /* Mobile navigation */
   var menuToggle = doc.getElementById('menu-toggle');
   var nav = doc.getElementById('site-nav');
 
@@ -72,11 +66,11 @@
     });
   }
 
-  /* ---------- Footer year ---------- */
+  /* Footer year */
   var yearEl = doc.getElementById('year');
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
-  /* ---------- Active section in the nav ---------- */
+  /* Active section in the nav */
   var navLinks = nav ? Array.prototype.slice.call(nav.querySelectorAll('a[href^="#"]')) : [];
 
   if ('IntersectionObserver' in window && navLinks.length) {
@@ -100,7 +94,7 @@
     sections.forEach(function (s) { sectionIo.observe(s); });
   }
 
-  /* ---------- Mobile dock: hide while a tear-off strip is on screen ---------- */
+  /* Mobile dock: hide while a tear-off strip is on screen */
   var dock = doc.getElementById('dock');
   var strips = Array.prototype.slice.call(doc.querySelectorAll('.tearoff'));
 
@@ -116,7 +110,7 @@
     strips.forEach(function (s) { dockIo.observe(s); });
   }
 
-  /* ---------- Konami: the plates slip out of register ---------- */
+  /* Konami: the plates slip out of register */
   var konami = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
   var konamiIdx = 0;
   var toast = doc.getElementById('toast');
@@ -143,7 +137,7 @@
     }
   });
 
-  /* ---------- ثريا: the Pleiades settle into the letter dots ---------- */
+  /* ثريا: the Pleiades settle into the letter dots */
   var thurayya = (function () {
     var wrap = doc.getElementById('thurayya');
     if (!wrap || !window.HTMLCanvasElement) return null;
